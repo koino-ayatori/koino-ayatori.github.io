@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>恋の結び目診断｜恋のあやとり</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LZFV1CB90X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LZFV1CB90X');
+  function track(name, params){ try{ gtag('event', name, params || {}); }catch(e){} }
+</script>
+<meta name="description" content="恋がいつも同じところで苦しくなる理由を、8つの結び目で見つける9問の診断。">
+<meta property="og:title" content="恋の結び目診断｜恋のあやとり">
+<meta property="og:description" content="9問・約2分・登録不要。あなたの恋がからまる場所に名前をつけます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6EEF0;--paper-2:#EEE1E5;--card:#FBF6F7;--ink:#3A2E3F;--ink-soft:#7A6A75;
+  --thread:#C2416B;--line:#D9C5CC;--on-thread:#FFF7F9;--good:#3F8F7A;--bad:#C2416B;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#241D2A;--paper-2:#2E2535;--card:#2A2230;--ink:#F1E6EA;--ink-soft:#B6A3AE;
+    --thread:#E36F94;--line:#4A3D52;--on-thread:#241D2A;--good:#7CC7B2;--bad:#E36F94;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#241D2A;--paper-2:#2E2535;--card:#2A2230;--ink:#F1E6EA;--ink-soft:#B6A3AE;
+  --thread:#E36F94;--line:#4A3D52;--on-thread:#241D2A;--good:#7CC7B2;--bad:#E36F94;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--paper);color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+main{max-width:30rem;margin:0 auto;padding:2rem 1.25rem 3rem}
+.mincho{font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif}
+.screen{display:none}.screen.on{display:block}
+svg.ayatori{display:block;width:100%;height:auto;max-width:17rem;margin:0 auto}
+svg.ayatori path{fill:none;stroke:var(--thread);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+svg.ayatori circle{fill:var(--ink)}
+.draw path{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.2s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion: reduce){.draw path{animation:none;stroke-dashoffset:0}}
+h1{font-size:2.1rem;line-height:1.35;font-weight:700;margin:1.5rem 0 1rem;letter-spacing:.04em}
+.lead{color:var(--ink-soft);margin:0 0 1.5rem}
+.facts{display:flex;gap:1.5rem;margin:0 0 2rem;color:var(--ink-soft);font-size:.875rem}
+.facts b{display:block;color:var(--ink);font-size:1.25rem;font-weight:500}
+button,.btn{font:inherit;cursor:pointer;border:none;border-radius:999px;padding:1rem 1.5rem;width:100%;
+  font-size:1rem;font-weight:500;text-align:center;text-decoration:none;display:block}
+.primary{background:var(--thread);color:var(--on-thread)}
+.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button:focus-visible,.btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.note{font-size:.8rem;color:var(--ink-soft);margin-top:1rem}
+.progress{height:2px;background:var(--line);margin-bottom:2rem;position:relative}
+.progress span{position:absolute;inset:0 auto 0 0;background:var(--thread);transition:width .3s}
+.qnum{font-size:.875rem;color:var(--ink-soft);margin:0 0 .5rem}
+.q{font-size:1.4rem;line-height:1.6;margin:0 0 2rem;min-height:4.5rem}
+.opt{background:var(--paper-2);color:var(--ink);border-radius:1rem;text-align:left;padding:1.1rem 1.25rem;
+  margin-bottom:.75rem;border:1px solid transparent}
+.opt:hover{border-color:var(--thread)}
+.back{background:none;color:var(--ink-soft);width:auto;padding:.5rem 0;font-size:.875rem;margin-top:1rem}
+
+/* 結果 */
+.rtype{font-size:.875rem;color:var(--ink-soft);margin:1.25rem 0 .25rem;text-align:center}
+.rname{font-size:2.4rem;text-align:center;margin:0 0 .5rem;letter-spacing:.08em;white-space:nowrap}
+.rcatch{text-align:center;margin:0 0 1.5rem}
+.axes{margin:0 0 .5rem}
+.axis{margin-bottom:.9rem}
+.axis-lab{display:flex;justify-content:space-between;font-size:.8rem;color:var(--ink-soft)}
+.axis-lab b{color:var(--ink);font-weight:500}
+.axis-bar{height:6px;border-radius:3px;background:var(--line);position:relative;overflow:hidden}
+.axis-bar span{position:absolute;inset:0 auto 0 0;background:var(--thread);border-radius:3px}
+section.blk{background:var(--card);border-radius:1.5rem;padding:1.6rem 1.4rem;margin-top:1.1rem;box-shadow:0 2px 0 var(--line)}
+.blk h2{font-size:1.1rem;line-height:1.5;margin:0 0 .75rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:.55rem}
+.blk h2::before{content:"";flex:0 0 .6rem;width:.6rem;height:.6rem;border-radius:50%;background:var(--thread)}
+.blk p{margin:0 0 .75rem}.blk p:last-child{margin-bottom:0}
+.list{list-style:none;margin:0;padding:0}
+.list.ring li{border-top:none;padding:.45rem 0 .45rem 2rem;position:relative}
+.list.ring li::before{content:"";position:absolute;left:0;top:.8rem;width:1.1rem;height:1.1rem;border-radius:50%;border:3px solid var(--thread)}
+.list.bubble li{border-top:none;background:var(--paper-2);border-radius:1rem;padding:.85rem 1rem;margin-bottom:.6rem}
+.list.bubble li:last-child{margin-bottom:0}
+.list li{padding:.6rem 0;border-top:1px solid var(--line)}
+.list li:first-child{border-top:none;padding-top:0}
+.quote{background:var(--paper-2);border-radius:.9rem;padding:.8rem 1rem;margin-bottom:.6rem}
+.quote:last-child{margin-bottom:0}
+.tonight{border:1.5px dashed var(--thread);background:transparent}
+.tonight h2{color:var(--thread)}
+.match{display:flex;gap:1rem;align-items:flex-start;background:var(--paper-2);border-radius:1.1rem;padding:1rem;margin-bottom:.7rem}
+.mi{position:relative;flex:0 0 3.6rem}
+.badge{position:absolute;right:-.4rem;bottom:-.4rem;width:1.6rem;height:1.6rem;border-radius:50%;background:var(--card);
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:500;box-shadow:0 1px 0 var(--line)}
+.badge.g{color:var(--good)}.badge.b{color:var(--bad)}
+.match svg{display:block;width:3.6rem;height:auto}
+.match svg path{fill:none;stroke:var(--thread);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.match svg circle{fill:var(--ink)}
+.match b{display:block}
+.mark{font-size:.8rem;font-weight:500}
+.mark.g{color:var(--good)}.mark.b{color:var(--bad)}
+.match small{display:block;color:var(--ink-soft);font-size:.875rem;line-height:1.7}
+.subh{font-size:1rem;font-weight:500;color:var(--ink);margin:1.25rem 0 .6rem}
+.subh:first-of-type{margin-top:0}
+.cta{background:var(--card);border-radius:1.5rem;padding:1.6rem 1.4rem;margin-top:1.1rem;box-shadow:0 2px 0 var(--line)}
+.cta .pr-top{font-size:.75rem;color:var(--ink-soft);margin:0 0 .6rem}
+.cta h2{font-size:1.15rem;margin:0 0 .75rem;white-space:nowrap;display:flex;align-items:center;gap:.55rem}
+.cta h2::before{content:"";flex:0 0 .6rem;width:.6rem;height:.6rem;border-radius:50%;background:var(--thread)}
+.cta p{margin:0 0 1.25rem}
+.cta .btn{background:var(--thread);color:var(--on-thread);padding:1.15rem 1.5rem}
+.cta .pr{font-size:.75rem;color:var(--ink-soft);margin:.75rem 0 0;text-align:center}
+.row{display:flex;gap:.75rem;margin-top:1.25rem}
+.row button{flex:1}
+.toast{position:fixed;left:50%;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  background:var(--ink);color:var(--paper);padding:.6rem 1.1rem;border-radius:999px;font-size:.875rem;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+footer{max-width:30rem;margin:0 auto;padding:0 1.25rem 2rem;font-size:.75rem;color:var(--ink-soft);line-height:1.7}
+</style>
+</head>
+<body>
+<main>
+
+<section class="screen on" id="intro">
+  <svg class="ayatori draw" viewBox="0 0 300 200" aria-hidden="true">
+    <circle cx="40" cy="100" r="5"/><circle cx="260" cy="100" r="5"/>
+    <path d="M40 100 L110 40 L190 160 L260 100 L190 40 L110 160 Z"/>
+    <path d="M110 40 L190 40 M110 160 L190 160 M75 70 L225 130 M75 130 L225 70"/>
+  </svg>
+  <h1 class="mincho">恋の結び目診断</h1>
+  <p class="lead">恋がいつも同じところで苦しくなるのは、気持ちがからまる「結び目」があるから。9つの問いで、あなたの結び目に名前をつけます。</p>
+  <div class="facts"><div><b>9問</b>設問</div><div><b>約2分</b>所要</div><div><b>不要</b>登録</div></div>
+  <button class="primary" id="startBtn">診断をはじめる</button>
+  <button class="ghost" id="resumeBtn" style="margin-top:.75rem" hidden>前回の続きから再開する</button>
+  <p class="note">選ぶだけで進みます。正解も不正解もありません。</p>
+</section>
+
+<section class="screen" id="quiz">
+  <div class="progress"><span id="bar" style="width:0"></span></div>
+  <p class="qnum" id="qnum"></p>
+  <p class="q mincho" id="qtext"></p>
+  <div id="opts"></div>
+  <button class="back" id="backBtn">ひとつ前に戻る</button>
+</section>
+
+<section class="screen" id="result">
+  <svg class="ayatori draw" id="rsvg" viewBox="0 0 300 200" aria-hidden="true"></svg>
+  <p class="rtype">あなたの結び目は</p>
+  <h1 class="rname mincho" id="rname"></h1>
+  <p class="rcatch" id="rcatch"></p>
+  <div class="axes" id="axes"></div>
+
+  <section class="blk"><h2 class="mincho" id="hType"></h2><div id="rdesc"></div></section>
+  <section class="blk"><h2 class="mincho" id="rmechH"></h2><div id="rmech"></div></section>
+  <section class="blk"><h2 class="mincho" id="rmech2H"></h2><div id="rmech2"></div></section>
+  <section class="blk"><h2 class="mincho" id="rreH"></h2><div id="rre"></div></section>
+  <section class="blk"><h2 class="mincho">あなたの強み</h2><ul class="list ring" id="rstr"></ul><div class="quote" id="rnote" style="margin-top:1rem"></div></section>
+  <section class="blk"><h2 class="mincho">苦しくなりやすい瞬間</h2><ul class="list bubble" id="rmom"></ul></section>
+  <section class="blk"><h2 class="mincho">相性の結び目</h2><div id="rmatch"></div></section>
+  <section class="blk"><h2 class="mincho">この恋が終わるとき</h2><p id="rend"></p></section>
+  <section class="blk"><h2 class="mincho">本当は言われたい言葉</h2><div id="rwords"></div></section>
+  <section class="blk tonight"><h2 class="mincho">今夜できること、ひとつ</h2><p id="rtonight"></p></section>
+
+  <div class="cta">
+    <p class="pr-top">広告（PR）を含みます</p>
+    <h2 class="mincho">ひとりでほどくのは難しい</h2>
+    <p>結び目は、ひとりで引っぱるほど固くなります。声に出して誰かに聞いてもらうと、自分でも気づかなかった本音が出てきます。今夜だれかに聞いてほしいときは、こちらから。</p>
+    <a class="btn" id="ctaLink" href="#" target="_blank" rel="noopener sponsored">プロに声で相談してみる</a>
+    <p class="pr">外部の電話相談サービスのサイトが開きます。</p>
+  </div>
+
+  <div class="row">
+    <button class="ghost" id="copyBtn">シェアする</button>
+    <button class="ghost" id="retryBtn">もう一度やる</button>
+  </div>
+</section>
+
+</main>
+<footer>この診断は、心理検査や医療的な診断ではありません。恋のくせを知るきっかけとしてお楽しみください。<br>恋のあやとり ／ このページには広告（PR）が含まれます。</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ===== 設定：ここにA8の広告リンクを貼る ===== */
+const AFFILIATE_URL = "https://example.com/REPLACE_WITH_A8_LINK";
+const SHARE_TAG = "#恋の結び目診断";
+
+const QUESTIONS = [
+  {axis:"A", q:"既読がついたまま、返事がこない。", a:["自分からもう一通送る","返ってくるまで待つ"]},
+  {axis:"B", q:"返事がいつもよりそっけなかった。", a:["誰かといるのかなと考える","何か悪いこと言ったかなと考える"]},
+  {axis:"C", q:"終わりが近いと感じたとき。", a:["なんとか引き止めようとする","傷つく前に自分から終わらせる"]},
+  {axis:"A", q:"気になる人ができたら。", a:["自分から誘う","誘われるのを待つ"]},
+  {axis:"B", q:"楽しみにしていた約束が流れた。", a:["本当は会いたくないのかもと思う","自分に魅力がないのかもと思う"]},
+  {axis:"C", q:"別れたあと、連絡先は。", a:["なかなか消せない","すぐに全部消す"]},
+  {axis:"A", q:"会えない週が続いている。", a:["会いに行く理由を探す","相手が言い出すのを待つ"]},
+  {axis:"B", q:"喧嘩のあと、頭に残っているのは。", a:["相手のあの言い方","自分のあの一言"]},
+  {axis:"C", q:"「少し距離を置こう」と言われたら。", a:["待つ。ずっと待つ","それなら終わりにしようと言う"]}
+];
+const AXES = {A:["追う","待つ"], B:["相手を疑う","自分を責める"], C:["離せない","先に切る"]};
+
+const TYPES = {
+"000":{name:"からまり結び",catch:"追いかけて、疑って、それでも離れられない。",
+ desc:["好きになるほど、相手の小さな変化が見えてしまう。既読の時間、返事の長さ、絵文字の数。確かめたくて連絡を重ねるうちに、相手との距離より、不安との距離のほうが近くなっていきます。","愛情が深いことと、安心できることは別のものです。あなたは前者だけが先に育ちすぎています。"],
+ str:["好きな人にまっすぐ気持ちを向けられる","関係を簡単にあきらめない","相手の変化にすぐ気づける"],
+ mom:["返事が来るまで、他のことが手につかない","確かめた直後だけ、少し安心する","安心が続かず、また確かめたくなる"],
+ mechH:"確かめるほど、不安は育つ",
+ mech:["確かめる連絡は、一瞬だけ不安を消してくれます。でもその安心が癖になり、次の不安はもう少し大きくなって戻ってきます。","相手が離れていくのではありません。確かめる回数が増えるほど、相手を信じる練習をしなくなっている。結び目は、そこで固くなります。"],
+ end:"終わるときは、相手が「少し疲れた」と言ったときです。あなたは愛していただけなのに、その愛し方が重さとして届いてしまう。",
+ words:["「どこにも行かないよ」","「連絡しなくても、ちゃんと好きだよ」"],
+ tonight:"送ろうとしたメッセージを、下書きのまま朝まで置いてください。朝になっても送りたければ、それは不安ではなく本音です。",
+ good:["110","010"],bad:["111","101"]},
+"001":{name:"ほどき急ぎ",catch:"不安になると、答えを急いで自分で切ってしまう。",
+ desc:["曖昧な時間が、何より苦手です。気持ちが読めなくなると、白か黒かをはっきりさせたくなる。答えを待つ宙ぶらりんに耐えるより、自分で終わらせるほうが楽に感じてしまいます。","決断が早いのは強さです。でも恋の答えは、急いで出すほど本当の答えから遠ざかります。"],
+ str:["自分の気持ちに正直でいられる","ずるずる続く関係を作らない","立ち直りが早い"],
+ mom:["返事を待つ時間が、責められているように感じる","「はっきりして」と言った直後に後悔する","終わらせたあとで、まだ好きだったと気づく"],
+ mechH:"白黒をつけると、灰色が消える",
+ mech:["恋の多くの時間は灰色です。好きだけど不安、会いたいけど疲れている。その灰色を待てずに白黒をつけると、まだ育つはずだった気持ちまで一緒に切れてしまいます。","あなたが切っているのは関係ではなく、答えが出るまでの時間です。"],
+ end:"終わるときは、あなたが「もういい」と言ったときです。相手はまだ、答えを考えている途中だったかもしれません。",
+ words:["「答えはゆっくりでいいよ」","「急がなくても、ここにいるよ」"],
+ tonight:"はっきりさせたいことを紙に書いて、答えの欄を空けたまま眠ってください。空欄のまま朝を迎えられたら、それが一歩です。",
+ good:["010","110"],bad:["101","000"]},
+"010":{name:"尽くし糸",catch:"好かれるために、自分をすり減らしていく。",
+ desc:["好きな人の役に立てると安心します。相手が喜ぶことを先回りして、自分の予定も気持ちも後回しにする。うまくいかないときは、相手ではなく自分の足りなさを探してしまいます。","尽くすことは愛情です。でも、尽くさないと愛されないと思っているなら、それは愛情ではなく取引になっています。"],
+ str:["相手の喜ぶことを自然に考えられる","小さな変化にも気を配れる","関係を大切に育てようとする"],
+ mom:["「ありがとう」が減ると、自分が悪い気がする","断られるのが怖くて、頼みごとができない","尽くした分が返ってこないと、急に苦しくなる"],
+ mechH:"与えるほど、自分が薄くなる",
+ mech:["尽くし続けると、相手はそれを当たり前だと思いはじめます。悪気はなく、慣れてしまうだけです。","するとあなたは、もっと尽くさないと届かない気がしてくる。与える量が増えるほど、あなた自身の輪郭が薄くなっていきます。"],
+ end:"終わるときは、あなたが空っぽになったときです。相手は最後まで、あなたが無理をしていたことに気づかないかもしれません。",
+ words:["「何もしなくても、一緒にいたいよ」","「今日は甘えていいよ」"],
+ tonight:"今日だれかのためにしたことを一つ思い出して、明日は代わりに自分のためにすることを一つ予定に入れてください。",
+ good:["100","001"],bad:["000","101"]},
+"011":{name:"燃え尽き糸",catch:"全力で追って、全力で疲れて、ふっと消える。",
+ desc:["好きになると、最初から全力です。毎日連絡して、会える時間はすべて会う。でも報われない気がした瞬間、全部を自分のせいにして、ある日ふっと気持ちが消えてしまいます。","熱量が高いのは才能です。ただ、最初に全部を燃やすと、関係が育つ前に燃料が尽きます。"],
+ str:["好きな気持ちを全身で表現できる","一緒にいる時間を本気で楽しめる","恋に臆病にならない"],
+ mom:["相手の温度が自分より低いと気づいた瞬間","頑張っているのに届かないと感じた夜","急に何も感じなくなった自分に驚く"],
+ mechH:"全力の恋は、早く冷える",
+ mech:["最初から百で走ると、相手が七十でも「冷たい」と感じます。その差を埋めようとさらに燃やし、届かない分を自分の欠点だと思い込む。","燃え尽きたのは恋ではなく、あなたの体力です。気持ちが消えたように見えて、実は疲れて休んでいるだけのこともあります。"],
+ end:"終わるときは突然です。昨日まで好きだったのに、今日は何も感じない。相手には、その理由が分かりません。",
+ words:["「そのペースで大丈夫だよ」","「頑張らなくても、ちゃんと好き」"],
+ tonight:"明日の連絡を一回だけ減らしてみてください。減らしても関係が続くことを、自分の目で確かめるために。",
+ good:["100","110"],bad:["001","111"]},
+"100":{name:"待ちぼうけ結び",catch:"動けないまま、相手の沈黙を悪く読んでしまう。",
+ desc:["自分からは動けません。連絡も誘いも、相手からを待つ。そして待っているあいだに、相手の沈黙を悪いほうへ読んでしまいます。","待てるのは誠実さです。ただ、待ちながら疑っていると、相手からの一通が届く前に、心のほうが先に離れていきます。"],
+ str:["相手のペースを尊重できる","感情に任せた行動をしない","慎重で、軽はずみに人を傷つけない"],
+ mom:["通知が鳴らない夜に、理由を考えはじめる","相手のSNSだけは、つい見てしまう","会いたいのに「別にいいよ」と言ってしまう"],
+ mechH:"待つ時間に、物語が育つ",
+ mech:["連絡がない時間、人は空白を想像で埋めます。あなたの場合、その想像はたいてい悪いほうへ進む。","相手はただ忙しいだけかもしれません。でもあなたの中ではもう物語ができあがっていて、事実よりその物語を信じてしまいます。"],
+ end:"終わるときは、どちらからも連絡しなくなったときです。はっきりした別れがないまま、自然に消えていきます。",
+ words:["「連絡しなかったのは、忙しかっただけだよ」","「誘ってくれて嬉しかった」"],
+ tonight:"用事がなくてもいい一言を、自分から一通だけ送ってみてください。返事の内容より、送れた自分を覚えておくために。",
+ good:["000","011"],bad:["101","111"]},
+"101":{name:"試し糸",catch:"相手の本気を、離れるそぶりで確かめてしまう。",
+ desc:["相手の本気を、言葉ではなく行動で確かめたくなります。そっけなくしてみる、わざと返事を遅らせる、離れるそぶりを見せる。追ってきてくれたら安心できる、と思っています。","確かめたい気持ちは自然です。でも試されるほど、相手は「信じてもらえていない」と感じて、少しずつ疲れていきます。"],
+ str:["自分を簡単に安売りしない","相手の本気を見極めようとする","ひとりの時間も大切にできる"],
+ mom:["追ってこなかった瞬間、全部を失った気がする","試したことを、あとでひとり後悔する","本当は「寂しい」とだけ言いたかった"],
+ mechH:"試すほど、答えはずれる",
+ mech:["離れるそぶりに相手が追ってこないのは、愛がないからとは限りません。あなたの気持ちを尊重しようとしているだけのこともあります。","試しの答えは、いつも少しずれて返ってくる。そのずれを「やっぱり」と受け取って、本当に離れてしまいます。"],
+ end:"終わるときは、試しが本当になったときです。最後の一回だけ、相手は追ってきませんでした。",
+ words:["「試さなくても、ちゃんと好きだよ」","「寂しいなら、寂しいって言って」"],
+ tonight:"素っ気なくしたくなったら、その代わりに「ちょっと寂しい」と一言だけ送ってください。",
+ good:["011","110"],bad:["100","001"]},
+"110":{name:"片結び",catch:"言えない想いを、ひとりで結び続けている。",
+ desc:["想いを言葉にするのが苦手です。好きでも寂しくても、口に出す前に飲み込んでしまう。返事がないのは自分に魅力がないからだと、ひとりで結論を出してしまいます。","言わないのは優しさです。でも、言わない想いは消えません。あなたの中で、ひとりでに結ばれ続けます。"],
+ str:["相手の気持ちを先に想像できる","場の空気を壊さない","一度好きになると、深く長く想える"],
+ mom:["言おうとした言葉を飲み込んだ夜","相手の何気ない一言を、何日も考えている","終わったあとも、言えなかった言葉だけが残る"],
+ mechH:"飲み込んだ言葉は、重くなる",
+ mech:["言わなかった一言は、なかったことにはなりません。次に言いたいことの上に重なって、いざ口を開くときには何倍もの重さになっています。","重いから、また言えない。その繰り返しで、伝えたい想いの量だけが増えていきます。"],
+ end:"終わるときは、相手が何も知らないまま離れていくときです。あなただけが、全部を覚えています。",
+ words:["「ゆっくりでいいから聞かせて」","「言ってくれて嬉しい」"],
+ tonight:"言えなかった一言を、ひとりの部屋で一度だけ声に出してみてください。声にした言葉は、少しだけ軽くなります。",
+ good:["011","001"],bad:["101","111"]},
+"111":{name:"ほつれ糸",catch:"傷つく前に、静かに自分からいなくなる。",
+ desc:["傷つく前に、静かにいなくなります。不安になっても相手を責めず、自分の欠点のせいにして、何も言わずに距離を取る。相手が気づいたときには、もう心は遠くにあります。","去り際がきれいなのは、あなたの品です。でも理由を告げずに去るたびに、同じ別れ方を繰り返してしまいます。"],
+ str:["相手を責めず、自分で引き受けられる","依存しすぎず、ひとりで立てる","別れ際に人を傷つけない"],
+ mom:["少しでも嫌われた気がすると、心を閉じる","「大丈夫」と言いながら、離れる準備をしている","本当は、引き止めてほしかった"],
+ mechH:"黙って離れると、理由が残らない",
+ mech:["何も言わずに離れると、相手は理由が分かりません。そしてあなたも、本当の理由を確かめる機会を失います。","自分のせいだと思ったまま終わるから、次の恋でも同じところで心が閉じる。ほつれは、いつも同じ場所から始まります。"],
+ end:"終わるときは、相手が気づく前です。相手にとっては突然でも、あなたの中ではずっと前に終わっていました。",
+ words:["「黙っていなくならないで」","「嫌いになんてならないよ」"],
+ tonight:"離れたい理由をひとつだけ、声に出して言ってみてください。言葉にすると、本当に離れたいのかどうかが分かります。",
+ good:["000","010"],bad:["100","001"]}
+};
+const EXTRA = {"000": {"mech2H": "不安なときほど、相手が見えなくなる", "mech2": ["不安が強いとき、目に入るのは「返事が来ない」ことだけです。今日会ってくれたこと、昨日の優しい一言は、見えなくなってしまう。", "相手が冷たくなったのではなく、不安が視界を狭くしている。そう気づくだけで、少し呼吸が楽になります。"], "reH": "確かめたいのは、大切だから", "re": ["確かめたくなるのは、あなたが弱いからではありません。失いたくないほど、大切に思っているからです。", "ただ、その大切さを伝える方法は、確かめることだけではありません。「会えて嬉しかった」の一言のほうが、ずっとまっすぐ届きます。"], "note": "「重い」と言われることがあっても、その熱量は、本気で人を想える証拠です。"}, "001": {"mech2H": "待てないのは、傷つきたくないから", "mech2": ["答えを急ぐ本当の理由は、曖昧な時間に傷つくのが怖いからです。振られるくらいなら、自分から終わらせたほうがまし。", "でもそれは、傷つかない代わりに、うまくいく可能性まで手放しているということです。"], "reH": "迷っている時間も、恋の一部", "re": ["答えが出ない時間は、失敗ではありません。二人の気持ちが、まだ形になる途中なだけです。", "すぐに決めなくていい。保留にできた夜は、ちゃんと前に進んでいます。"], "note": "決断の早さは、恋以外の場面で、あなたを何度も助けてきたはずです。"}, "010": {"mech2H": "断れないのは、嫌われるのが怖いから", "mech2": ["「無理」と言えないのは、優しいからだけではありません。断ったら、離れていかれる気がするからです。", "でも本当に大切にしてくれる人は、一度断られたくらいで離れていきません。"], "reH": "何もしない日があっていい", "re": ["あなたの価値は、相手のために何をしたかで決まるものではありません。", "何もしない日にも好きでいてくれる人。そういう人と一緒にいるために、自分を後回しにするのをやめていい。"], "note": "誰かの小さな困りごとに気づける力は、どこへ行っても大切にされます。"}, "011": {"mech2H": "好きの量で、愛を測ってしまう", "mech2": ["あなたは「どれだけ好きか」で愛を伝えます。だから相手の好きが少なく見えると、自分の愛が報われていない気がしてしまう。", "でも人によって、好きの出し方は違います。静かに想う愛し方も、ちゃんと愛です。"], "reH": "ゆっくり燃える恋もある", "re": ["最初から全力じゃなくても、恋は育ちます。むしろ長く続く恋は、たいてい弱火から始まります。", "力を抜くのは手を抜くことではありません。長く好きでいるための、ペース配分です。"], "note": "あなたの全力は、相手にとって忘れられない思い出になっています。"}, "100": {"mech2H": "動かないのは、断られるのが怖いから", "mech2": ["自分から誘わないのは、遠慮しているからではありません。断られたときに傷つくのが怖いからです。", "でも待っているあいだも、心はずっと傷ついています。動かないことは、守っているようで守れていません。"], "reH": "一通送るのは、迷惑じゃない", "re": ["あなたからの連絡を、迷惑だと思う人はほとんどいません。むしろ、嬉しいと感じる人のほうが多いものです。", "「送っていいのかな」と迷ったら、それは送っていいサインです。"], "note": "落ち着いて人と向き合えるあなたは、一緒にいて安心できる人です。"}, "101": {"mech2H": "試すのは、信じたいから", "mech2": ["試したくなるのは、相手を疑っているからではなく、本当は信じたいからです。追ってきてくれたら、やっと信じられる。", "でも、どれだけ試しても安心は長く続きません。安心は、確かめた回数ではなく、言葉にした回数で育ちます。"], "reH": "寂しいと言っていい", "re": ["「寂しい」と言うのは、負けではありません。弱さを見せることは、相手を信じているという意味です。", "素直な一言は、どんな駆け引きよりも、相手の心をまっすぐ動かします。"], "note": "自分を大切にできるあなたは、大切にされる恋を選べる人です。"}, "110": {"mech2H": "察してほしいと思ってしまう", "mech2": ["言わなくても分かってほしい。そう思うほど、言葉はどんどん出てこなくなります。", "でも、どんなに好きな相手でも、言われていないことは分かりません。気づいてもらえないのは、愛がないからではありません。"], "reH": "言葉は、遅れて届いてもいい", "re": ["その場で言えなくても大丈夫です。言葉にするのは、手紙でも、次に会ったときでもかまいません。", "あなたの言葉は、時間がかかる分だけ深い。いつか外に出してあげてください。"], "note": "あなたが選んで口にした言葉は、相手の心に長く残ります。"}, "111": {"mech2H": "離れるのは、嫌われる前に", "mech2": ["静かに離れるのは、相手に嫌われるのが怖いからです。嫌われる前に自分からいなくなれば、傷は小さくて済む。", "でもその代わりに、好きでいてもらえたかもしれない未来も、一緒に手放しています。"], "reH": "理由を伝えて離れていい", "re": ["本当に離れたいなら、離れていい。ただ、理由をひとつだけ伝えてから離れてください。", "言葉にして離れた恋は、次の恋のための答えを残してくれます。"], "note": "人を傷つけない別れ方を選べるのは、本当の優しさです。"}};
+const MATCH_NOTE = {
+ good:"ゆるめ合えるタイプ",
+ bad:"引っぱり合うタイプ"
+};
+
+const SHAPES = {
+"000":["M40 100 L110 40 L190 160 L260 100 L190 40 L110 160 Z","M110 40 L190 160 M110 160 L190 40 M75 100 L225 100"],
+"001":["M40 100 L120 50 L180 150 L260 100","M120 50 L180 50 M120 150 L180 150"],
+"010":["M40 100 L100 60 L150 140 L200 60 L260 100","M100 60 L100 140 L200 140 L200 60"],
+"011":["M40 100 L150 40 L260 100 L150 160 Z","M150 40 L150 160"],
+"100":["M40 100 L260 100","M90 70 L210 130 M90 130 L210 70"],
+"101":["M40 100 L130 45 L260 100","M130 45 L130 155 L40 100"],
+"110":["M40 100 C100 30 200 30 260 100","M40 100 C100 170 200 170 260 100 M150 40 L150 160"],
+"111":["M40 100 L120 70 M180 130 L260 100","M120 70 L140 90 M160 110 L180 130"]
+};
+function shapeSVG(key){
+  return '<circle cx="40" cy="100" r="7"/><circle cx="260" cy="100" r="7"/>' + SHAPES[key].map(d=>'<path d="'+d+'"/>').join("");
+}
+
+const STORE = "ayatori_shindan_v4";
+let answers = [], idx = 0, lastKey = null;
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on")); $(id).classList.add("on"); window.scrollTo(0,0); }
+function save(){ try{ localStorage.setItem(STORE, JSON.stringify({answers,idx})); }catch(e){} }
+function load(){ try{ const v = JSON.parse(localStorage.getItem(STORE)); return v && Array.isArray(v.answers) ? v : null; }catch(e){ return null; } }
+function clear(){ try{ localStorage.removeItem(STORE); }catch(e){} }
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),1800); }
+
+function renderQ(){
+  const item = QUESTIONS[idx];
+  $("bar").style.width = (idx / QUESTIONS.length * 100) + "%";
+  $("qnum").textContent = (idx + 1) + " / " + QUESTIONS.length;
+  $("qtext").textContent = item.q;
+  const box = $("opts"); box.innerHTML = "";
+  item.a.forEach((label,i)=>{
+    const b=document.createElement("button"); b.className="opt"; b.textContent=label; b.onclick=()=>pick(i); box.appendChild(b);
+  });
+  $("backBtn").style.visibility = idx === 0 ? "hidden" : "visible";
+}
+function pick(i){ answers[idx]=i; idx++; save(); if(idx>=QUESTIONS.length) finish(); else renderQ(); }
+
+function finish(){
+  const score={A:0,B:0,C:0};
+  QUESTIONS.forEach((q,i)=>{ score[q.axis]+=answers[i]; });
+  const key=["A","B","C"].map(k=>score[k]>=2?"1":"0").join("");
+  lastKey=key;
+  const t=TYPES[key];
+  $("rname").textContent=t.name;
+  $("rcatch").textContent=t.catch;
+  $("axes").innerHTML=["A","B","C"].map(k=>{
+    const pct=Math.round(score[k]/3*100);
+    const side = pct>=50 ? 1 : 0;
+    const shown = side ? pct : 100-pct;
+    return '<div class="axis"><div class="axis-lab"><span>'+AXES[k][0]+'</span><b>'+AXES[k][side]+'寄り '+shown+'%</b><span>'+AXES[k][1]+'</span></div>'+
+      '<div class="axis-bar"><span style="width:'+pct+'%;'+(pct===0?'width:4px':'')+'"></span></div></div>';
+  }).join("");
+  $("hType").textContent=t.name+"のあなた";
+  $("rdesc").innerHTML=t.desc.map(p=>"<p>"+esc(p)+"</p>").join("");
+  $("rstr").innerHTML=t.str.map(s=>"<li>"+esc(s)+"</li>").join("");
+  $("rmom").innerHTML=t.mom.map(s=>"<li>"+esc(s)+"</li>").join("");
+  $("rmechH").textContent=t.mechH;
+  const x=EXTRA[key];
+  $("rmech2H").textContent=x.mech2H;
+  $("rmech2").innerHTML=x.mech2.map(p=>"<p>"+esc(p)+"</p>").join("");
+  $("rreH").textContent=x.reH;
+  $("rre").innerHTML=x.re.map(p=>"<p>"+esc(p)+"</p>").join("");
+  $("rnote").textContent=x.note;
+  $("rmech").innerHTML=t.mech.map(p=>"<p>"+esc(p)+"</p>").join("");
+  $("rend").textContent=t.end;
+  $("rwords").innerHTML=t.words.map(w=>'<div class="quote">'+esc(w)+'</div>').join("");
+  $("rtonight").textContent=t.tonight;
+  const m = (arr,kind)=> arr.map(k=>'<div class="match"><div class="mi"><svg viewBox="0 0 300 200" aria-hidden="true">'+shapeSVG(k)+'</svg><span class="badge '+(kind==="good"?"g":"b")+'">'+(kind==="good"?"◎":"×")+'</span></div><div>'+
+      '<b class="mincho">'+TYPES[k].name+'</b><small>'+TYPES[k].catch+'</small></div></div>').join("");
+  $("rmatch").innerHTML='<p class="subh">'+MATCH_NOTE.good+'</p>'+m(t.good,"good")+'<p class="subh">'+MATCH_NOTE.bad+'</p>'+m(t.bad,"bad");
+  const svg=$("rsvg"); svg.innerHTML=shapeSVG(key).replace(/r="7"/g,'r="5"');
+  svg.classList.remove("draw"); void svg.offsetWidth; svg.classList.add("draw");
+  track("quiz_complete",{type_name:t.name,type_key:key});
+  clear(); show("result");
+}
+
+async function shareResult(){
+  if(!lastKey) return;
+  track("share_click",{type_name:TYPES[lastKey].name});
+  const t=TYPES[lastKey];
+  const url=location.href.split("#")[0];
+  const text="私の恋の結び目は「"+t.name+"」でした。\n"+t.catch+"\n"+SHARE_TAG+"\n";
+  if(navigator.share){ try{ await navigator.share({text, url}); return; }catch(e){ if(e && e.name==="AbortError") return; } }
+  try{ await navigator.clipboard.writeText(text+url); toast("結果をコピーしました"); }
+  catch(e){ toast("コピーできませんでした。画面を長押ししてコピーしてください"); }
+}
+
+$("ctaLink").href=AFFILIATE_URL;
+$("ctaLink").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:""}));
+$("startBtn").onclick=()=>{ answers=[]; idx=0; clear(); track("quiz_start"); show("quiz"); renderQ(); };
+$("resumeBtn").onclick=()=>{ const v=load(); if(v){ answers=v.answers; idx=v.idx; } show("quiz"); renderQ(); };
+$("backBtn").onclick=()=>{ if(idx>0){ idx--; save(); renderQ(); } };
+$("retryBtn").onclick=()=>{ answers=[]; idx=0; track("quiz_retry"); show("intro"); };
+$("copyBtn").onclick=shareResult;
+const saved=load();
+if(saved && saved.idx>0 && saved.idx<QUESTIONS.length){ $("resumeBtn").hidden=false; }
+</script>
+</body>
+</html>
