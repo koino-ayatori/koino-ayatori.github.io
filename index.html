@@ -13,9 +13,9 @@
   gtag('config', 'G-LZFV1CB90X');
   function track(name, params){ try{ gtag('event', name, params || {}); }catch(e){} }
 </script>
-<meta name="description" content="恋がいつも同じところで苦しくなる理由を、8つの結び目で見つける9問の診断。">
+<meta name="description" content="恋がいつも同じところで苦しくなる理由を、8つの結び目で見つける10問の診断。">
 <meta property="og:title" content="恋の結び目診断｜恋のあやとり">
-<meta property="og:description" content="9問・約1分・登録不要。あなたの恋がからまる場所に名前をつけます。">
+<meta property="og:description" content="10問・約1分・登録不要。あなたの恋がからまる場所に名前をつけます。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
@@ -132,8 +132,8 @@ footer{max-width:30rem;margin:0 auto;padding:0 1.25rem 2rem;font-size:.75rem;col
     <path d="M110 40 L190 40 M110 160 L190 160 M75 70 L225 130 M75 130 L225 70"/>
   </svg>
   <h1 class="mincho">恋の結び目診断</h1>
-  <p class="lead">恋がいつも同じところで苦しくなるのは、気持ちがからまる「結び目」があるから。9つの問いで、あなたの結び目に名前をつけます。</p>
-  <div class="facts"><div><b>9問</b>設問</div><div><b>約1分</b>所要</div><div><b>不要</b>登録</div></div>
+  <p class="lead">恋がいつも同じところで苦しくなるのは、気持ちがからまる「結び目」があるから。10の問いで、あなたの結び目に名前をつけます。</p>
+  <div class="facts"><div><b>10問</b>設問</div><div><b>約1分</b>所要</div><div><b>不要</b>登録</div></div>
   <button class="primary" id="startBtn">診断をはじめる</button>
   <button class="ghost" id="resumeBtn" style="margin-top:.75rem" hidden>前回の続きから再開する</button>
   <p class="note">選ぶだけで進みます。正解も不正解もありません。</p>
@@ -197,7 +197,8 @@ const QUESTIONS = [
   {axis:"C", q:"別れたあと、連絡先は。", a:["なかなか消せない","すぐに全部消す"]},
   {axis:"A", q:"会えない週が続いている。", a:["会いに行く理由を探す","相手が言い出すのを待つ"]},
   {axis:"B", q:"喧嘩のあと、頭に残っているのは。", a:["相手のあの言い方","自分のあの一言"]},
-  {axis:"C", q:"「少し距離を置こう」と言われたら。", a:["待つ。ずっと待つ","それなら終わりにしようと言う"]}
+  {axis:"C", q:"「少し距離を置こう」と言われたら。", a:["待つ。ずっと待つ","それなら終わりにしようと言う"]},
+  {axis:"A", q:"好きな人からの連絡が減ってきた。", a:["自分から話題を振って増やそうとする","相手に合わせて、こちらも減らす"]}
 ];
 const AXES = {A:["追う","待つ"], B:["相手を疑う","自分を責める"], C:["離せない","先に切る"]};
 
@@ -303,7 +304,7 @@ function shapeSVG(key){
   return '<circle cx="40" cy="100" r="7"/><circle cx="260" cy="100" r="7"/>' + SHAPES[key].map(d=>'<path d="'+d+'"/>').join("");
 }
 
-const STORE = "ayatori_shindan_v4";
+const STORE = "ayatori_shindan_v5";
 let answers = [], idx = 0, lastKey = null;
 const $ = id => document.getElementById(id);
 const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -330,16 +331,19 @@ function pick(i){ answers[idx]=i; idx++; save(); if(idx>=QUESTIONS.length) finis
 function finish(){
   const score={A:0,B:0,C:0};
   QUESTIONS.forEach((q,i)=>{ score[q.axis]+=answers[i]; });
-  const key=["A","B","C"].map(k=>score[k]>=2?"1":"0").join("");
+  const cnt={A:0,B:0,C:0}; const first={};
+  QUESTIONS.forEach((q,i)=>{ cnt[q.axis]++; if(first[q.axis]===undefined) first[q.axis]=answers[i]; });
+  const side=k=>{ const r=score[k]/cnt[k]; return r>0.5?1:(r<0.5?0:first[k]); };
+  const key=["A","B","C"].map(k=>String(side(k))).join("");
   lastKey=key;
   const t=TYPES[key];
   $("rname").textContent=t.name;
   $("rcatch").textContent=t.catch;
   $("axes").innerHTML=["A","B","C"].map(k=>{
-    const pct=Math.round(score[k]/3*100);
-    const side = pct>=50 ? 1 : 0;
-    const shown = side ? pct : 100-pct;
-    return '<div class="axis"><div class="axis-lab"><span>'+AXES[k][0]+'</span><b>'+AXES[k][side]+'寄り '+shown+'%</b><span>'+AXES[k][1]+'</span></div>'+
+    const pct=Math.round(score[k]/cnt[k]*100);
+    const sd = side(k);
+    const shown = sd ? pct : 100-pct;
+    return '<div class="axis"><div class="axis-lab"><span>'+AXES[k][0]+'</span><b>'+AXES[k][sd]+'寄り '+shown+'%</b><span>'+AXES[k][1]+'</span></div>'+
       '<div class="axis-bar"><span style="width:'+pct+'%;'+(pct===0?'width:4px':'')+'"></span></div></div>';
   }).join("");
   $("hType").textContent=t.name+"のあなた";
