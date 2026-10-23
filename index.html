@@ -442,8 +442,8 @@ $("ctaLink").href=AFFILIATE_URL;
 $("ctaLink").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"bottom",utm_source:UTM_SOURCE}));
 $("ctaImg").href=AFFILIATE_URL;
 $("ctaImg").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"cover",utm_source:UTM_SOURCE}));
-$("startBtn").onclick=()=>{ answers=[]; idx=0; clear(); track("quiz_start"); show("quiz"); renderQ(); };
-$("resumeBtn").onclick=()=>{ const v=load(); if(v){ answers=v.answers; idx=v.idx; } show("quiz"); renderQ(); };
+$("startBtn").onclick=()=>{ if(window.__startSound) window.__startSound(); answers=[]; idx=0; clear(); track("quiz_start"); show("quiz"); renderQ(); };
+$("resumeBtn").onclick=()=>{ if(window.__startSound) window.__startSound(); const v=load(); if(v){ answers=v.answers; idx=v.idx; } show("quiz"); renderQ(); };
 $("backBtn").onclick=()=>{ if(idx>0){ idx--; save(); renderQ(); } };
 $("retryBtn").onclick=()=>{ answers=[]; idx=0; track("quiz_retry"); show("intro"); };
 $("copyBtn").onclick=shareResult;
@@ -512,7 +512,9 @@ if(saved && saved.idx>0 && saved.idx<QUESTIONS.length){ $("resumeBtn").hidden=fa
     }else{ on=false; if(au) au.pause(); }
     label(); track("sound_toggle",{on:on?1:0});
   }
-  $("sndBtn").addEventListener("click",()=>setOn(!on));
+  let manualOff=false;
+  $("sndBtn").addEventListener("click",()=>{ manualOff=on; setOn(!on); });
+  window.__startSound=function(){ if(!on && !manualOff) setOn(true); };
   document.addEventListener("visibilitychange",()=>{ if(!au||!on) return; if(document.hidden) au.pause(); else au.play().catch(()=>{}); });
 })();
 </script>
