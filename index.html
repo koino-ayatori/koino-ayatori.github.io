@@ -502,19 +502,28 @@ if(saved && saved.idx>0 && saved.idx<QUESTIONS.length){ $("resumeBtn").hidden=fa
   window.__buildSound=build;
   setTimeout(()=>{ try{ build(); }catch(e){} },1500);
   function label(){ const b=$("sndBtn"); b.setAttribute("aria-pressed",String(on)); b.textContent="♪ 音楽 "+(on?"ON":"OFF"); }
-  async function setOn(v){
+  let manualOff=false;
+  const DBG=/[?&]debug/.test(location.search); let dbg=null, lastErr="-";
+  function dlog(){ if(!DBG) return; if(!dbg){ dbg=document.createElement("div"); dbg.id="dbg"; dbg.style.cssText="position:fixed;left:6px;bottom:6px;z-index:99;background:rgba(0,0,0,.75);color:#0f0;font:11px/1.4 monospace;padding:4px 6px;border-radius:4px;max-width:90vw;pointer-events:none"; document.body.appendChild(dbg); }
+    dbg.textContent="v3 on="+on+" paused="+(au?au.paused:"-")+" err="+lastErr+" audioSession="+(navigator.audioSession?navigator.audioSession.type:"none"); }
+  async function setOn(v,fromStart){
     if(v){
       try{ if(navigator.audioSession) navigator.audioSession.type="playback"; }catch(e){}
       try{
-        if(!au){ au=new Audio(); au.loop=true; au.setAttribute("playsinline",""); au.src=build(); }
-        await au.play(); on=true;
-      }catch(e){ on=false; toast("この端末では音楽を流せません"); }
+        if(!au){ au=new Audio(); au.loop=true; au.setAttribute("playsinline",""); au.src=build();
+          ["playing","pause","error","stalled"].forEach(ev=>au.addEventListener(ev,()=>{ if(ev==="error") lastErr="mediaerr"+(au.error?au.error.code:""); dlog(); })); }
+        await au.play(); on=true; lastErr="-";
+      }catch(e){
+        on=false; lastErr=(e&&e.name)||"error";
+        if(fromStart){ document.addEventListener("pointerup",()=>{ if(!on && !manualOff) setOn(true); },{once:true,capture:true}); }
+        else toast("この端末では音楽を流せません");
+      }
     }else{ on=false; if(au) au.pause(); }
-    label(); track("sound_toggle",{on:on?1:0});
+    label(); dlog(); track("sound_toggle",{on:on?1:0});
   }
-  let manualOff=false;
   $("sndBtn").addEventListener("click",()=>{ manualOff=on; setOn(!on); });
-  window.__startSound=function(){ if(!on && !manualOff) setOn(true); };
+  window.__startSound=function(){ if(!on && !manualOff) setOn(true,true); };
+  dlog();
   document.addEventListener("visibilitychange",()=>{ if(!au||!on) return; if(document.hidden) au.pause(); else au.play().catch(()=>{}); });
 })();
 </script>
