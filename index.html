@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>恋の結び目診断｜恋のあやとり</title>
+<title>恋の癖診断｜恋のあやとり</title>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LZFV1CB90X"></script>
 <script>
@@ -13,9 +13,9 @@
   gtag('config', 'G-LZFV1CB90X');
   function track(name, params){ try{ gtag('event', name, params || {}); }catch(e){} }
 </script>
-<meta name="description" content="恋がいつも同じところで苦しくなる理由を、8つの結び目で見つける10問の診断。">
-<meta property="og:title" content="恋の結び目診断｜恋のあやとり">
-<meta property="og:description" content="10問・約1分・登録不要。あなたの恋がからまる場所に名前をつけます。">
+<meta name="description" content="あなたの恋がうまくいかない理由を、1分で見つける10問の診断。">
+<meta property="og:title" content="恋の癖診断｜恋のあやとり">
+<meta property="og:description" content="10問・約1分・登録不要。あなたの「恋の癖」を知る診断です。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
@@ -134,23 +134,88 @@ body{word-break:auto-phrase}
   background:var(--ink);color:var(--paper);padding:.6rem 1.1rem;border-radius:999px;font-size:.875rem;opacity:0;transition:opacity .2s;pointer-events:none}
 .toast.on{opacity:1}
 footer{max-width:30rem;margin:0 auto;padding:0 1.25rem 2rem;font-size:.75rem;color:var(--ink-soft);line-height:1.7}
+
+[hidden]{display:none!important}
+/* ===== intro hero ===== */
+#intro.on{display:block}
+.hero{position:fixed;inset:0;z-index:20;overflow-x:hidden;overflow-y:auto;color:#FBEFF3;text-align:center;
+  background:radial-gradient(120% 80% at 50% 0%,#5a2547 0%,#2b1830 55%,#1a1020 100%);
+  display:flex;padding:calc(3.2rem + env(safe-area-inset-top,0px)) 1.5rem calc(1.5rem + env(safe-area-inset-bottom,0px))}
+.hero::before{content:"";position:absolute;inset:-30%;pointer-events:none;
+  background:radial-gradient(40% 40% at 30% 30%,rgba(255,111,157,.34),transparent 70%),radial-gradient(35% 35% at 75% 68%,rgba(150,90,255,.26),transparent 70%);
+  animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(6%,-4%,0) rotate(12deg) scale(1.1)}}
+.dots{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.dots span{position:absolute;bottom:-14px;background:rgba(255,196,214,.85);border-radius:50%;opacity:0;
+  animation:floatUp var(--t,12s) linear var(--w,0s) infinite}
+.dots span.p{border-radius:60% 0 60% 0;background:rgba(255,150,185,.8)}
+@keyframes floatUp{0%{transform:translate3d(0,0,0) rotate(0);opacity:0}10%{opacity:.85}100%{transform:translate3d(var(--x,20px),-110vh,0) rotate(220deg);opacity:0}}
+.hero-in{position:relative;margin:auto;width:100%;max-width:26rem}
+.hero .eyebrow{margin:0;font-size:.8rem;letter-spacing:.35em;color:#FFB3CB}
+.hero h1{font-size:2.7rem;margin:.6rem 0 1.6rem;letter-spacing:.12em;color:#fff;text-shadow:0 0 24px rgba(255,111,157,.55)}
+.hero p{margin:0}
+.hero .l1{font-size:1.1rem;line-height:1.9}
+.hero .l1 b{color:#FF9FBE;font-size:1.5rem;font-weight:700;padding:0 .1em}
+.hero .l2{margin-top:1.1rem;font-size:1.1rem;line-height:1.9;color:#FFE3EC}
+.hero .fork{display:block;width:9rem;height:auto;margin:.9rem auto .4rem;overflow:visible}
+.hero .fork path{fill:none;stroke:#FF7AA5;stroke-width:2;stroke-linecap:round;stroke-dasharray:140;stroke-dashoffset:140;
+  filter:drop-shadow(0 0 5px rgba(255,111,157,.9));animation:draw2 1.1s ease-out var(--d,0s) forwards}
+@keyframes draw2{to{stroke-dashoffset:0}}
+.hero .fork .end{fill:#FFD3E1;opacity:0;filter:drop-shadow(0 0 6px #FF7AA5);animation:pop .6s ease-out var(--d,0s) forwards}
+@keyframes pop{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
+.hero .fork .end{transform-box:fill-box;transform-origin:center}
+.hero .l3{font-size:1.25rem;line-height:1.95;color:#fff;letter-spacing:.04em}
+.hero .act{margin-top:1.8rem}
+.hero .primary{background:linear-gradient(135deg,#FF7AA5,#C2416B);color:#fff;font-size:1.08rem;font-weight:700;padding:1.15rem 1.5rem;
+  box-shadow:0 8px 28px rgba(255,111,157,.45);animation:glow 2.2s ease-in-out 4.8s infinite}
+@keyframes glow{0%,100%{box-shadow:0 8px 28px rgba(255,111,157,.45),0 0 0 0 rgba(255,122,165,.5)}50%{box-shadow:0 8px 34px rgba(255,111,157,.6),0 0 0 10px rgba(255,122,165,0)}}
+.hero .ghost{margin-top:.75rem;color:#FBEFF3;border-color:rgba(255,255,255,.3)}
+.hero .facts2{margin-top:.9rem;font-size:.85rem;color:#E9C9D5}
+.hero .disc{margin-top:1.6rem;font-size:.7rem;line-height:1.7;color:rgba(251,239,243,.55)}
+.r{opacity:0;transform:translateY(14px);filter:blur(6px);animation:rise 1s cubic-bezier(.2,.7,.2,1) var(--d,0s) forwards}
+@keyframes rise{to{opacity:1;transform:none;filter:none}}
+.skip .r{animation:none;opacity:1;transform:none;filter:none}
+.skip .fork path{animation:none;stroke-dashoffset:0}
+.skip .fork .end{animation:none;opacity:1}
+@media (prefers-reduced-motion: reduce){
+  .r{animation:none;opacity:1;transform:none;filter:none}
+  .hero .fork path{animation:none;stroke-dashoffset:0}.hero .fork .end{animation:none;opacity:1}
+  .hero::before,.dots span,.hero .primary{animation:none}.dots{display:none}
+}
+.snd{position:fixed;top:calc(.8rem + env(safe-area-inset-top,0px));right:.8rem;z-index:30;width:auto;padding:.45rem .9rem;font-size:.8rem;
+  border-radius:999px;background:var(--card);color:var(--ink);border:1px solid var(--line)}
+body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.snd[aria-pressed="true"]{border-color:#FF7AA5}
 </style>
 </head>
-<body>
+<body class="onintro">
+<button class="snd" id="sndBtn" aria-pressed="false" aria-label="音楽のオンオフ">♪ 音楽 OFF</button>
 <main>
 
 <section class="screen on" id="intro">
-  <svg class="ayatori draw" viewBox="0 0 300 200" aria-hidden="true">
-    <circle cx="40" cy="100" r="5"/><circle cx="260" cy="100" r="5"/>
-    <path d="M40 100 L110 40 L190 160 L260 100 L190 40 L110 160 Z"/>
-    <path d="M110 40 L190 40 M110 160 L190 160 M75 70 L225 130 M75 130 L225 70"/>
-  </svg>
-  <h1 class="mincho">恋の結び目診断</h1>
-  <p class="lead">恋がいつも同じところで苦しくなるのは、気持ちがからまる「結び目」があるから。10の問いで、あなたの結び目に名前をつけます。</p>
-  <div class="facts"><div><b>10問</b>設問</div><div><b>約1分</b>所要</div><div><b>不要</b>登録</div></div>
-  <button class="primary" id="startBtn">診断をはじめる</button>
-  <button class="ghost" id="resumeBtn" style="margin-top:.75rem" hidden>前回の続きから再開する</button>
-  <p class="note">選ぶだけで進みます。正解も不正解もありません。</p>
+<div class="hero" id="hero">
+  <div class="dots" id="dots" aria-hidden="true"></div>
+  <div class="hero-in">
+    <p class="eyebrow r" style="--d:.1s">恋のあやとり</p>
+    <h1 class="mincho r" style="--d:.3s">恋の癖診断</h1>
+    <p class="l1 r" style="--d:1s">あなたの恋がうまくいかない理由を<br><b>1分</b>で見つけます。</p>
+    <p class="l2 r" style="--d:1.9s">この診断が、<br>幸せな恋への第一歩。</p>
+    <svg class="fork" viewBox="0 0 240 120" aria-hidden="true">
+      <path style="--d:2.5s" d="M120 0 C120 30 120 42 120 56"/>
+      <path style="--d:3s" d="M120 56 C120 90 62 78 48 112"/>
+      <path style="--d:3s" d="M120 56 C120 90 178 78 192 112"/>
+      <circle class="end" style="--d:4s" cx="48" cy="114" r="4"/>
+      <circle class="end" style="--d:4s" cx="192" cy="114" r="4"/>
+    </svg>
+    <p class="l3 mincho r" style="--d:3.2s">ここで動くか、動かないか。<br>未来を選ぶのは、あなたです。</p>
+    <div class="act r" style="--d:3.9s">
+      <button class="primary" id="startBtn">今すぐ診断する</button>
+      <button class="ghost" id="resumeBtn" hidden>前回の続きから再開する</button>
+      <p class="facts2">10問｜約1分｜登録不要</p>
+    </div>
+    <p class="disc">この診断は、心理検査や医療的な診断ではありません。<br>恋のくせを知るきっかけとしてお楽しみください。</p>
+  </div>
+</div>
 </section>
 
 <section class="screen" id="quiz">
@@ -316,7 +381,7 @@ let answers = [], idx = 0, lastKey = null;
 const $ = id => document.getElementById(id);
 const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on")); $(id).classList.add("on"); window.scrollTo(0,0); }
+function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on")); $(id).classList.add("on"); document.body.classList.toggle("onintro",id==="intro"); window.scrollTo(0,0); }
 function save(){ try{ localStorage.setItem(STORE, JSON.stringify({answers,idx})); }catch(e){} }
 function load(){ try{ const v = JSON.parse(localStorage.getItem(STORE)); return v && Array.isArray(v.answers) ? v : null; }catch(e){ return null; } }
 function clear(){ try{ localStorage.removeItem(STORE); }catch(e){} }
@@ -386,6 +451,68 @@ $("retryBtn").onclick=()=>{ answers=[]; idx=0; track("quiz_retry"); show("intro"
 $("copyBtn").onclick=shareResult;
 const saved=load();
 if(saved && saved.idx>0 && saved.idx<QUESTIONS.length){ $("resumeBtn").hidden=false; }
+
+/* ===== intro演出・音楽 ===== */
+(function(){
+  const hero=$("hero");
+  hero.addEventListener("click",e=>{ if(!e.target.closest("button")) hero.classList.add("skip"); });
+  const dots=$("dots");
+  for(let i=0;i<22;i++){
+    const d=document.createElement("span"), sz=3+Math.random()*7;
+    if(i%2) d.className="p";
+    d.style.cssText="left:"+(Math.random()*100)+"%;width:"+sz+"px;height:"+sz+"px;--t:"+(9+Math.random()*10)+"s;--w:-"+(Math.random()*14)+"s;--x:"+((Math.random()-.5)*90)+"px";
+    dots.appendChild(d);
+  }
+  // 音楽：Web Audioで生成する静かなアンビエント（音源ファイルなし・著作権の問題なし）
+  let ctx,master,echo,on=false,padT,bellT,step=0;
+  const CH=[[110,164.81,261.63,329.63],[87.31,130.81,220,261.63],[130.81,196,261.63,329.63],[98,146.83,246.94,293.66]];
+  const NOTES=[440,523.25,659.25,783.99,880,1046.5];
+  function init(){
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false;
+    ctx=new AC(); master=ctx.createGain(); master.gain.value=0; master.connect(ctx.destination);
+    echo=ctx.createDelay(1); echo.delayTime.value=.42; const fb=ctx.createGain(); fb.gain.value=.38;
+    echo.connect(fb); fb.connect(echo); const wet=ctx.createGain(); wet.gain.value=.5; echo.connect(wet); wet.connect(master);
+    return true;
+  }
+  function pad(){
+    if(!on) return;
+    const t=ctx.currentTime, lp=ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=900; lp.connect(master);
+    CH[step++%CH.length].forEach(f=>{
+      [-4,4].forEach(dt=>{
+        const o=ctx.createOscillator(), g=ctx.createGain(); o.type="triangle"; o.frequency.value=f; o.detune.value=dt;
+        g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.05,t+3); g.gain.linearRampToValueAtTime(0,t+9.5);
+        o.connect(g); g.connect(lp); o.start(t); o.stop(t+10);
+      });
+    });
+    padT=setTimeout(pad,8000);
+  }
+  function bell(){
+    if(!on) return;
+    const t=ctx.currentTime, f=NOTES[Math.floor(Math.random()*NOTES.length)];
+    [[1,.16],[2,.04]].forEach(([m,v])=>{
+      const o=ctx.createOscillator(), g=ctx.createGain(); o.type="sine"; o.frequency.value=f*m;
+      g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(v,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+2.8);
+      o.connect(g); g.connect(master); g.connect(echo); o.start(t); o.stop(t+3);
+    });
+    bellT=setTimeout(bell,1500+Math.random()*2800);
+  }
+  function setOn(v){
+    const b=$("sndBtn");
+    if(v){
+      if(!ctx && !init()){ toast("この端末では音楽を流せません"); return; }
+      on=true; ctx.resume();
+      master.gain.cancelScheduledValues(ctx.currentTime); master.gain.linearRampToValueAtTime(1,ctx.currentTime+2);
+      clearTimeout(padT); clearTimeout(bellT); pad(); bellT=setTimeout(bell,1200);
+    }else{
+      on=false; clearTimeout(padT); clearTimeout(bellT);
+      if(ctx){ master.gain.cancelScheduledValues(ctx.currentTime); master.gain.linearRampToValueAtTime(0,ctx.currentTime+.6); }
+    }
+    b.setAttribute("aria-pressed",String(on)); b.textContent="♪ 音楽 "+(on?"ON":"OFF");
+    track("sound_toggle",{on:on?1:0});
+  }
+  $("sndBtn").addEventListener("click",()=>setOn(!on));
+  document.addEventListener("visibilitychange",()=>{ if(!ctx||!on) return; if(document.hidden) ctx.suspend(); else ctx.resume(); });
+})();
 </script>
 </body>
 </html>
