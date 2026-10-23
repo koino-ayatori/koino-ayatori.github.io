@@ -138,10 +138,10 @@ footer{max-width:30rem;margin:0 auto;padding:0 1.25rem 2rem;font-size:.75rem;col
 [hidden]{display:none!important}
 /* ===== intro hero ===== */
 #intro.on{display:block}
-.hero{position:fixed;inset:0;z-index:20;overflow-x:hidden;overflow-y:auto;color:#FBEFF3;text-align:center;
+.ihero{position:fixed;inset:0;z-index:20;overflow-x:hidden;overflow-y:auto;color:#FFF4E6;text-align:center;
   background:radial-gradient(120% 80% at 50% 0%,#5a2547 0%,#2b1830 55%,#1a1020 100%);
   display:flex;padding:calc(3.2rem + env(safe-area-inset-top,0px)) 1.5rem calc(1.5rem + env(safe-area-inset-bottom,0px))}
-.hero::before{content:"";position:absolute;inset:-30%;pointer-events:none;
+.ihero::before{content:"";position:absolute;inset:-30%;pointer-events:none;
   background:radial-gradient(40% 40% at 30% 30%,rgba(255,111,157,.34),transparent 70%),radial-gradient(35% 35% at 75% 68%,rgba(150,90,255,.26),transparent 70%);
   animation:drift 14s ease-in-out infinite alternate}
 @keyframes drift{to{transform:translate3d(6%,-4%,0) rotate(12deg) scale(1.1)}}
@@ -150,28 +150,28 @@ footer{max-width:30rem;margin:0 auto;padding:0 1.25rem 2rem;font-size:.75rem;col
   animation:floatUp var(--t,12s) linear var(--w,0s) infinite}
 .dots span.p{border-radius:60% 0 60% 0;background:rgba(255,150,185,.8)}
 @keyframes floatUp{0%{transform:translate3d(0,0,0) rotate(0);opacity:0}10%{opacity:.85}100%{transform:translate3d(var(--x,20px),-110vh,0) rotate(220deg);opacity:0}}
-.hero-in{position:relative;margin:auto;width:100%;max-width:26rem}
-.hero .eyebrow{margin:0;font-size:.8rem;letter-spacing:.35em;color:#FFB3CB}
-.hero h1{font-size:2.7rem;margin:.6rem 0 1.6rem;letter-spacing:.12em;color:#fff;text-shadow:0 0 24px rgba(255,111,157,.55)}
-.hero p{margin:0}
-.hero .l1{font-size:1.1rem;line-height:1.9}
-.hero .l1 b{color:#FF9FBE;font-size:1.5rem;font-weight:700;padding:0 .1em}
-.hero .l2{margin-top:1.1rem;font-size:1.1rem;line-height:1.9;color:#FFE3EC}
-.hero .fork{display:block;width:9rem;height:auto;margin:.9rem auto .4rem;overflow:visible}
-.hero .fork path{fill:none;stroke:#FF7AA5;stroke-width:2;stroke-linecap:round;stroke-dasharray:140;stroke-dashoffset:140;
+.ihero-in{position:relative;margin:auto;width:100%;max-width:26rem}
+.ihero .eyebrow{margin:0;font-size:.8rem;letter-spacing:.35em;color:#D9B873}
+.ihero h1{font-size:2.7rem;margin:.6rem 0 1.6rem;letter-spacing:.12em;color:#F2D9A0;background:linear-gradient(180deg,#FFF1C9 0%,#E9C77B 55%,#C9A24D 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 14px rgba(233,199,123,.4))}
+.ihero p{margin:0}
+.ihero .l1{font-size:1.1rem;line-height:1.9}
+.ihero .l1 b{color:#EBCB86;font-size:1.5rem;font-weight:700;padding:0 .1em}
+.ihero .l2{margin-top:1.1rem;font-size:1.1rem;line-height:1.9;color:#FFF4E6}
+.ihero .fork{display:block;width:9rem;height:auto;margin:.9rem auto .4rem;overflow:visible}
+.ihero .fork path{fill:none;stroke:#FF7AA5;stroke-width:2;stroke-linecap:round;stroke-dasharray:140;stroke-dashoffset:140;
   filter:drop-shadow(0 0 5px rgba(255,111,157,.9));animation:draw2 1.1s ease-out var(--d,0s) forwards}
 @keyframes draw2{to{stroke-dashoffset:0}}
-.hero .fork .end{fill:#FFD3E1;opacity:0;filter:drop-shadow(0 0 6px #FF7AA5);animation:pop .6s ease-out var(--d,0s) forwards}
+.ihero .fork .end{fill:#EBCB86;opacity:0;filter:drop-shadow(0 0 6px #E9C77B);animation:pop .6s ease-out var(--d,0s) forwards}
 @keyframes pop{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
-.hero .fork .end{transform-box:fill-box;transform-origin:center}
-.hero .l3{font-size:1.25rem;line-height:1.95;color:#fff;letter-spacing:.04em}
-.hero .act{margin-top:1.8rem}
-.hero .primary{background:linear-gradient(135deg,#FF7AA5,#C2416B);color:#fff;font-size:1.08rem;font-weight:700;padding:1.15rem 1.5rem;
+.ihero .fork .end{transform-box:fill-box;transform-origin:center}
+.ihero .l3{font-size:1.25rem;line-height:1.95;color:#FFF4E6;letter-spacing:.04em}
+.ihero .act{margin-top:1.8rem}
+.ihero .primary{background:linear-gradient(135deg,#FF7AA5,#C2416B);color:#fff;font-size:1.08rem;font-weight:700;padding:1.15rem 1.5rem;
   box-shadow:0 8px 28px rgba(255,111,157,.45);animation:glow 2.2s ease-in-out 4.8s infinite}
 @keyframes glow{0%,100%{box-shadow:0 8px 28px rgba(255,111,157,.45),0 0 0 0 rgba(255,122,165,.5)}50%{box-shadow:0 8px 34px rgba(255,111,157,.6),0 0 0 10px rgba(255,122,165,0)}}
-.hero .ghost{margin-top:.75rem;color:#FBEFF3;border-color:rgba(255,255,255,.3)}
-.hero .facts2{margin-top:.9rem;font-size:.85rem;color:#E9C9D5}
-.hero .disc{margin-top:1.6rem;font-size:.7rem;line-height:1.7;color:rgba(251,239,243,.55)}
+.ihero .ghost{margin-top:.75rem;color:#FFF4E6;border-color:rgba(255,255,255,.3)}
+.ihero .facts2{margin-top:.9rem;font-size:.85rem;color:#E3CFA0}
+.ihero .disc{margin-top:1.6rem;font-size:.7rem;line-height:1.7;color:rgba(255,244,230,.55)}
 .r{opacity:0;transform:translateY(14px);filter:blur(6px);animation:rise 1s cubic-bezier(.2,.7,.2,1) var(--d,0s) forwards}
 @keyframes rise{to{opacity:1;transform:none;filter:none}}
 .skip .r{animation:none;opacity:1;transform:none;filter:none}
@@ -179,8 +179,8 @@ footer{max-width:30rem;margin:0 auto;padding:0 1.25rem 2rem;font-size:.75rem;col
 .skip .fork .end{animation:none;opacity:1}
 @media (prefers-reduced-motion: reduce){
   .r{animation:none;opacity:1;transform:none;filter:none}
-  .hero .fork path{animation:none;stroke-dashoffset:0}.hero .fork .end{animation:none;opacity:1}
-  .hero::before,.dots span,.hero .primary{animation:none}.dots{display:none}
+  .ihero .fork path{animation:none;stroke-dashoffset:0}.ihero .fork .end{animation:none;opacity:1}
+  .ihero::before,.dots span,.ihero .primary{animation:none}.dots{display:none}
 }
 .snd{position:fixed;top:calc(.8rem + env(safe-area-inset-top,0px));right:.8rem;z-index:30;width:auto;padding:.45rem .9rem;font-size:.8rem;
   border-radius:999px;background:var(--card);color:var(--ink);border:1px solid var(--line)}
@@ -193,9 +193,9 @@ body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid r
 <main>
 
 <section class="screen on" id="intro">
-<div class="hero" id="hero">
+<div class="ihero" id="hero">
   <div class="dots" id="dots" aria-hidden="true"></div>
-  <div class="hero-in">
+  <div class="ihero-in">
     <p class="eyebrow r" style="--d:.1s">恋のあやとり</p>
     <h1 class="mincho r" style="--d:.3s">恋の癖診断</h1>
     <p class="l1 r" style="--d:1s">あなたの恋がうまくいかない理由を<br><b>1分</b>で見つけます。</p>
@@ -463,55 +463,59 @@ if(saved && saved.idx>0 && saved.idx<QUESTIONS.length){ $("resumeBtn").hidden=fa
     d.style.cssText="left:"+(Math.random()*100)+"%;width:"+sz+"px;height:"+sz+"px;--t:"+(9+Math.random()*10)+"s;--w:-"+(Math.random()*14)+"s;--x:"+((Math.random()-.5)*90)+"px";
     dots.appendChild(d);
   }
-  // 音楽：Web Audioで生成する静かなアンビエント（音源ファイルなし・著作権の問題なし）
-  let ctx,master,echo,on=false,padT,bellT,step=0;
+  // 音楽：32秒のアンビエントをページ内で生成してWAVにし、<audio>でループ再生する
+  // （音源ファイルなし・著作権の問題なし。<audio>はiPhoneのサイレントスイッチの影響を受けにくい）
+  const SR=16000, SEC=32, N=SR*SEC;
   const CH=[[110,164.81,261.63,329.63],[87.31,130.81,220,261.63],[130.81,196,261.63,329.63],[98,146.83,246.94,293.66]];
   const NOTES=[440,523.25,659.25,783.99,880,1046.5];
-  function init(){
-    const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false;
-    ctx=new AC(); master=ctx.createGain(); master.gain.value=0; master.connect(ctx.destination);
-    echo=ctx.createDelay(1); echo.delayTime.value=.42; const fb=ctx.createGain(); fb.gain.value=.38;
-    echo.connect(fb); fb.connect(echo); const wet=ctx.createGain(); wet.gain.value=.5; echo.connect(wet); wet.connect(master);
-    return true;
-  }
-  function pad(){
-    if(!on) return;
-    const t=ctx.currentTime, lp=ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=900; lp.connect(master);
-    CH[step++%CH.length].forEach(f=>{
-      [-4,4].forEach(dt=>{
-        const o=ctx.createOscillator(), g=ctx.createGain(); o.type="triangle"; o.frequency.value=f; o.detune.value=dt;
-        g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.05,t+3); g.gain.linearRampToValueAtTime(0,t+9.5);
-        o.connect(g); g.connect(lp); o.start(t); o.stop(t+10);
-      });
+  let url=null, au=null, on=false;
+  function build(){
+    if(url) return url;
+    const o=new Float32Array(N), TP=Math.PI*2;
+    CH.forEach((ch,k)=>{
+      const L=Math.floor(9.5*SR);
+      ch.forEach(f=>[-.5,.5].forEach(dt=>{
+        const w=TP*(f+dt)/SR;
+        for(let n=0;n<L;n++){
+          const u=n/SR, env=u<3?u/3:Math.max(0,1-(u-3)/6.5);
+          o[(k*8*SR+n)%N]+=.05*env*(Math.sin(w*n)+.25*Math.sin(2*w*n));
+        }
+      }));
     });
-    padT=setTimeout(pad,8000);
-  }
-  function bell(){
-    if(!on) return;
-    const t=ctx.currentTime, f=NOTES[Math.floor(Math.random()*NOTES.length)];
-    [[1,.16],[2,.04]].forEach(([m,v])=>{
-      const o=ctx.createOscillator(), g=ctx.createGain(); o.type="sine"; o.frequency.value=f*m;
-      g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(v,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+2.8);
-      o.connect(g); g.connect(master); g.connect(echo); o.start(t); o.stop(t+3);
-    });
-    bellT=setTimeout(bell,1500+Math.random()*2800);
-  }
-  function setOn(v){
-    const b=$("sndBtn");
-    if(v){
-      if(!ctx && !init()){ toast("この端末では音楽を流せません"); return; }
-      on=true; ctx.resume();
-      master.gain.cancelScheduledValues(ctx.currentTime); master.gain.linearRampToValueAtTime(1,ctx.currentTime+2);
-      clearTimeout(padT); clearTimeout(bellT); pad(); bellT=setTimeout(bell,1200);
-    }else{
-      on=false; clearTimeout(padT); clearTimeout(bellT);
-      if(ctx){ master.gain.cancelScheduledValues(ctx.currentTime); master.gain.linearRampToValueAtTime(0,ctx.currentTime+.6); }
+    let seed=7; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+    for(let t=.5;t<SEC;t+=1.5+rnd()*1.6){
+      const f=NOTES[Math.floor(rnd()*NOTES.length)], L=3*SR, st=Math.floor(t*SR), w=TP*f/SR;
+      for(let n=0;n<L;n++){
+        const u=n/SR, a=Math.min(1,n/(.01*SR));
+        o[(st+n)%N]+=a*(.15*Math.exp(-u*2.2)*Math.sin(w*n)+.04*Math.exp(-u*3)*Math.sin(2*w*n));
+      }
     }
-    b.setAttribute("aria-pressed",String(on)); b.textContent="♪ 音楽 "+(on?"ON":"OFF");
-    track("sound_toggle",{on:on?1:0});
+    const src=o.slice(), d=Math.floor(.42*SR);
+    for(let n=0;n<N;n++){ o[n]+=.45*src[(n-d+N)%N]+.2*src[(n-2*d+N)%N]+.09*src[(n-3*d+N)%N]; }
+    let pk=0; for(let n=0;n<N;n++){ const a=Math.abs(o[n]); if(a>pk) pk=a; }
+    const g=.5/(pk||1), buf=new ArrayBuffer(44+N*2), v=new DataView(buf);
+    const ws=(p,t)=>{ for(let q=0;q<t.length;q++) v.setUint8(p+q,t.charCodeAt(q)); };
+    ws(0,"RIFF"); v.setUint32(4,36+N*2,true); ws(8,"WAVEfmt "); v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,1,true);
+    v.setUint32(24,SR,true); v.setUint32(28,SR*2,true); v.setUint16(32,2,true); v.setUint16(34,16,true); ws(36,"data"); v.setUint32(40,N*2,true);
+    for(let n=0;n<N;n++) v.setInt16(44+n*2,Math.max(-1,Math.min(1,o[n]*g))*32767,true);
+    url=URL.createObjectURL(new Blob([buf],{type:"audio/wav"}));
+    return url;
+  }
+  window.__buildSound=build;
+  setTimeout(()=>{ try{ build(); }catch(e){} },1500);
+  function label(){ const b=$("sndBtn"); b.setAttribute("aria-pressed",String(on)); b.textContent="♪ 音楽 "+(on?"ON":"OFF"); }
+  async function setOn(v){
+    if(v){
+      try{ if(navigator.audioSession) navigator.audioSession.type="playback"; }catch(e){}
+      try{
+        if(!au){ au=new Audio(); au.loop=true; au.setAttribute("playsinline",""); au.src=build(); }
+        await au.play(); on=true;
+      }catch(e){ on=false; toast("この端末では音楽を流せません"); }
+    }else{ on=false; if(au) au.pause(); }
+    label(); track("sound_toggle",{on:on?1:0});
   }
   $("sndBtn").addEventListener("click",()=>setOn(!on));
-  document.addEventListener("visibilitychange",()=>{ if(!ctx||!on) return; if(document.hidden) ctx.suspend(); else ctx.resume(); });
+  document.addEventListener("visibilitychange",()=>{ if(!au||!on) return; if(document.hidden) au.pause(); else au.play().catch(()=>{}); });
 })();
 </script>
 </body>
