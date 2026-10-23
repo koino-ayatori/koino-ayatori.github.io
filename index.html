@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>恋の結び目診断｜恋のあやとり</title>
+<title>恋の癖診断｜恋のあやとり</title>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LZFV1CB90X"></script>
 <script>
@@ -14,7 +14,7 @@
   function track(name, params){ try{ gtag('event', name, params || {}); }catch(e){} }
 </script>
 <meta name="description" content="恋がいつも同じところで苦しくなる理由を、8つの結び目で見つける10問の診断。">
-<meta property="og:title" content="恋の結び目診断｜恋のあやとり">
+<meta property="og:title" content="恋の癖診断｜恋のあやとり">
 <meta property="og:description" content="10問・約1分・登録不要。あなたの恋がからまる場所に名前をつけます。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -145,10 +145,10 @@ footer{max-width:30rem;margin:0 auto;padding:0 1.25rem 2rem;font-size:.75rem;col
     <path d="M40 100 L110 40 L190 160 L260 100 L190 40 L110 160 Z"/>
     <path d="M110 40 L190 40 M110 160 L190 160 M75 70 L225 130 M75 130 L225 70"/>
   </svg>
-  <h1 class="mincho">恋の結び目診断</h1>
-  <p class="lead">恋がいつも同じところで苦しくなるのは、気持ちがからまる「結び目」があるから。10の問いで、あなたの結び目に名前をつけます。</p>
+  <h1 class="mincho">恋の癖診断</h1>
+  <p class="lead">恋がいつも同じところで苦しくなるのは、<br>あなたに「恋の癖」があるから。<br>10の質問で、あなたの癖がわかります。</p>
   <div class="facts"><div><b>10問</b>設問</div><div><b>約1分</b>所要</div><div><b>不要</b>登録</div></div>
-  <button class="primary" id="startBtn">診断をはじめる</button>
+  <button class="primary" id="startBtn">今すぐ診断する</button>
   <button class="ghost" id="resumeBtn" style="margin-top:.75rem" hidden>前回の続きから再開する</button>
   <p class="note">選ぶだけで進みます。正解も不正解もありません。</p>
 </section>
@@ -373,10 +373,12 @@ async function shareResult(){
   catch(e){ toast("コピーできませんでした。画面を長押ししてコピーしてください"); }
 }
 
+let UTM_SOURCE="(none)";
+try{ UTM_SOURCE=new URLSearchParams(location.search).get("utm_source")||"(none)"; }catch(e){}
 $("ctaLink").href=AFFILIATE_URL;
-$("ctaLink").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"bottom"}));
+$("ctaLink").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"bottom",utm_source:UTM_SOURCE}));
 $("ctaImg").href=AFFILIATE_URL;
-$("ctaImg").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"cover"}));
+$("ctaImg").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"cover",utm_source:UTM_SOURCE}));
 $("startBtn").onclick=()=>{ answers=[]; idx=0; clear(); track("quiz_start"); show("quiz"); renderQ(); };
 $("resumeBtn").onclick=()=>{ const v=load(); if(v){ answers=v.answers; idx=v.idx; } show("quiz"); renderQ(); };
 $("backBtn").onclick=()=>{ if(idx>0){ idx--; save(); renderQ(); } };
