@@ -189,7 +189,7 @@ body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid r
 </style>
 </head>
 <body class="onintro">
-<button class="snd" id="sndBtn" aria-pressed="false" aria-label="音楽のオンオフ">♪ 音楽 OFF</button>
+<button class="snd" id="sndBtn" aria-pressed="false" aria-label="音楽のオンオフ">♪ 音楽オフ</button>
 <main>
 
 <section class="screen on" id="intro">
@@ -383,7 +383,7 @@ function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.r
 function save(){ try{ localStorage.setItem(STORE, JSON.stringify({answers,idx})); }catch(e){} }
 function load(){ try{ const v = JSON.parse(localStorage.getItem(STORE)); return v && Array.isArray(v.answers) ? v : null; }catch(e){ return null; } }
 function clear(){ try{ localStorage.removeItem(STORE); }catch(e){} }
-function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),1800); }
+function toast(msg,ms){ const t=$("toast"); t.textContent=msg; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),ms||1800); }
 
 function renderQ(){
   const item = QUESTIONS[idx];
@@ -453,7 +453,7 @@ if(saved && saved.idx>0 && saved.idx<QUESTIONS.length){ $("resumeBtn").hidden=fa
 /* ===== intro演出・音楽 ===== */
 (function(){
   const hero=$("hero");
-  hero.addEventListener("click",e=>{ if(!e.target.closest("button")) hero.classList.add("skip"); });
+  hero.addEventListener("click",e=>{ if(!e.target.closest("button")){ hero.classList.add("skip"); if(window.__startSound) window.__startSound(); } });
   const dots=$("dots");
   for(let i=0;i<22;i++){
     const d=document.createElement("span"), sz=3+Math.random()*7;
@@ -501,7 +501,7 @@ if(saved && saved.idx>0 && saved.idx<QUESTIONS.length){ $("resumeBtn").hidden=fa
   }
   window.__buildSound=build;
   setTimeout(()=>{ try{ build(); }catch(e){} },1500);
-  function label(){ const b=$("sndBtn"); b.setAttribute("aria-pressed",String(on)); b.textContent="♪ 音楽 "+(on?"ON":"OFF"); }
+  function label(){ const b=$("sndBtn"); b.setAttribute("aria-pressed",String(on)); b.textContent="♪ 音楽"+(on?"オン":"オフ"); }
   let manualOff=false;
   const DBG=/[?&]debug/.test(location.search); let dbg=null, lastErr="-";
   function dlog(){ if(!DBG) return; if(!dbg){ dbg=document.createElement("div"); dbg.id="dbg"; dbg.style.cssText="position:fixed;left:6px;bottom:6px;z-index:99;background:rgba(0,0,0,.75);color:#0f0;font:11px/1.4 monospace;padding:4px 6px;border-radius:4px;max-width:90vw;pointer-events:none"; document.body.appendChild(dbg); }
@@ -515,7 +515,7 @@ if(saved && saved.idx>0 && saved.idx<QUESTIONS.length){ $("resumeBtn").hidden=fa
         await au.play(); on=true; lastErr="-";
       }catch(e){
         on=false; lastErr=(e&&e.name)||"error";
-        if(fromStart){ document.addEventListener("pointerup",()=>{ if(!on && !manualOff) setOn(true); },{once:true,capture:true}); }
+        if(fromStart){ toast("音楽を始められませんでした（"+lastErr+"）。右上の♪から押してください",6000); document.addEventListener("pointerup",()=>{ if(!on && !manualOff) setOn(true); },{once:true,capture:true}); }
         else toast("この端末では音楽を流せません");
       }
     }else{ on=false; if(au) au.pause(); }
