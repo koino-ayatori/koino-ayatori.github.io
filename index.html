@@ -189,7 +189,7 @@ body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid r
 </style>
 </head>
 <body class="onintro">
-<button class="snd" id="sndBtn" aria-pressed="false" aria-label="音楽のオンオフ">♪ 音楽オフ</button>
+<button class="snd" id="sndBtn" aria-pressed="false" aria-label="音楽のオンオフ">♪ 音楽 OFF</button>
 <main>
 
 <section class="screen on" id="intro">
@@ -501,7 +501,7 @@ if(saved && saved.idx>0 && saved.idx<QUESTIONS.length){ $("resumeBtn").hidden=fa
   }
   window.__buildSound=build;
   setTimeout(()=>{ try{ build(); }catch(e){} },1500);
-  function label(){ const b=$("sndBtn"); b.setAttribute("aria-pressed",String(on)); b.textContent="♪ 音楽"+(on?"オン":"オフ"); }
+  function label(){ const b=$("sndBtn"); b.setAttribute("aria-pressed",String(on)); b.textContent="♪ 音楽 "+(on?"ON":"OFF"); }
   let manualOff=false;
   const DBG=/[?&]debug/.test(location.search); let dbg=null, lastErr="-";
   function dlog(){ if(!DBG) return; if(!dbg){ dbg=document.createElement("div"); dbg.id="dbg"; dbg.style.cssText="position:fixed;left:6px;bottom:6px;z-index:99;background:rgba(0,0,0,.75);color:#0f0;font:11px/1.4 monospace;padding:4px 6px;border-radius:4px;max-width:90vw;pointer-events:none"; document.body.appendChild(dbg); }
