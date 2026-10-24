@@ -182,9 +182,14 @@ footer{max-width:30rem;margin:0 auto;padding:0 1.25rem 2rem;font-size:.75rem;col
   .ihero .fork path{animation:none;stroke-dashoffset:0}.ihero .fork .end{animation:none;opacity:1}
   .ihero::before,.dots span,.ihero .primary{animation:none}.dots{display:none}
 }
-body.onintro </style>
+.snd{position:fixed;top:calc(.8rem + env(safe-area-inset-top,0px));right:.8rem;z-index:30;width:auto;padding:.45rem .9rem;font-size:.8rem;
+  border-radius:999px;background:var(--card);color:var(--ink);border:1px solid var(--line)}
+body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.snd[aria-pressed="true"]{border-color:#FF7AA5}
+</style>
 </head>
 <body class="onintro">
+<button class="snd" id="sndBtn" aria-pressed="false" aria-label="音楽のオンオフ">♪ 音楽 OFF</button>
 <main>
 
 <section class="screen on" id="intro">
@@ -437,18 +442,18 @@ $("ctaLink").href=AFFILIATE_URL;
 $("ctaLink").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"bottom",utm_source:UTM_SOURCE}));
 $("ctaImg").href=AFFILIATE_URL;
 $("ctaImg").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"cover",utm_source:UTM_SOURCE}));
-$("startBtn").onclick=()=>{ answers=[]; idx=0; clear(); track("quiz_start"); show("quiz"); renderQ(); };
-$("resumeBtn").onclick=()=>{ const v=load(); if(v){ answers=v.answers; idx=v.idx; } show("quiz"); renderQ(); };
+$("startBtn").onclick=()=>{ if(window.__startSound) window.__startSound(); answers=[]; idx=0; clear(); track("quiz_start"); show("quiz"); renderQ(); };
+$("resumeBtn").onclick=()=>{ if(window.__startSound) window.__startSound(); const v=load(); if(v){ answers=v.answers; idx=v.idx; } show("quiz"); renderQ(); };
 $("backBtn").onclick=()=>{ if(idx>0){ idx--; save(); renderQ(); } };
 $("retryBtn").onclick=()=>{ answers=[]; idx=0; track("quiz_retry"); show("intro"); };
 $("copyBtn").onclick=shareResult;
 const saved=load();
 if(saved && saved.idx>0 && saved.idx<QUESTIONS.length){ $("resumeBtn").hidden=false; }
 
-/* ===== intro演出 ===== */
+/* ===== intro演出・音楽 ===== */
 (function(){
   const hero=$("hero");
-  hero.addEventListener("click",e=>{ if(!e.target.closest("button")) hero.classList.add("skip"); });
+  hero.addEventListener("click",e=>{ if(!e.target.closest("button")){ hero.classList.add("skip"); if(window.__startSound) window.__startSound(); } });
   const dots=$("dots");
   for(let i=0;i<22;i++){
     const d=document.createElement("span"), sz=3+Math.random()*7;
@@ -456,6 +461,70 @@ if(saved && saved.idx>0 && saved.idx<QUESTIONS.length){ $("resumeBtn").hidden=fa
     d.style.cssText="left:"+(Math.random()*100)+"%;width:"+sz+"px;height:"+sz+"px;--t:"+(9+Math.random()*10)+"s;--w:-"+(Math.random()*14)+"s;--x:"+((Math.random()-.5)*90)+"px";
     dots.appendChild(d);
   }
+  // 音楽：32秒のアンビエントをページ内で生成してWAVにし、<audio>でループ再生する
+  // （音源ファイルなし・著作権の問題なし。<audio>はiPhoneのサイレントスイッチの影響を受けにくい）
+  const SR=16000, SEC=32, N=SR*SEC;
+  const CH=[[110,164.81,261.63,329.63],[87.31,130.81,220,261.63],[130.81,196,261.63,329.63],[98,146.83,246.94,293.66]];
+  const NOTES=[440,523.25,659.25,783.99,880,1046.5];
+  let url=null, au=null, on=false;
+  function build(){
+    if(url) return url;
+    const o=new Float32Array(N), TP=Math.PI*2;
+    CH.forEach((ch,k)=>{
+      const L=Math.floor(9.5*SR);
+      ch.forEach(f=>[-.5,.5].forEach(dt=>{
+        const w=TP*(f+dt)/SR;
+        for(let n=0;n<L;n++){
+          const u=n/SR, env=u<3?u/3:Math.max(0,1-(u-3)/6.5);
+          o[(k*8*SR+n)%N]+=.05*env*(Math.sin(w*n)+.25*Math.sin(2*w*n));
+        }
+      }));
+    });
+    let seed=7; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+    for(let t=.5;t<SEC;t+=1.5+rnd()*1.6){
+      const f=NOTES[Math.floor(rnd()*NOTES.length)], L=3*SR, st=Math.floor(t*SR), w=TP*f/SR;
+      for(let n=0;n<L;n++){
+        const u=n/SR, a=Math.min(1,n/(.01*SR));
+        o[(st+n)%N]+=a*(.15*Math.exp(-u*2.2)*Math.sin(w*n)+.04*Math.exp(-u*3)*Math.sin(2*w*n));
+      }
+    }
+    const src=o.slice(), d=Math.floor(.42*SR);
+    for(let n=0;n<N;n++){ o[n]+=.45*src[(n-d+N)%N]+.2*src[(n-2*d+N)%N]+.09*src[(n-3*d+N)%N]; }
+    let pk=0; for(let n=0;n<N;n++){ const a=Math.abs(o[n]); if(a>pk) pk=a; }
+    const g=.5/(pk||1), buf=new ArrayBuffer(44+N*2), v=new DataView(buf);
+    const ws=(p,t)=>{ for(let q=0;q<t.length;q++) v.setUint8(p+q,t.charCodeAt(q)); };
+    ws(0,"RIFF"); v.setUint32(4,36+N*2,true); ws(8,"WAVEfmt "); v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,1,true);
+    v.setUint32(24,SR,true); v.setUint32(28,SR*2,true); v.setUint16(32,2,true); v.setUint16(34,16,true); ws(36,"data"); v.setUint32(40,N*2,true);
+    for(let n=0;n<N;n++) v.setInt16(44+n*2,Math.max(-1,Math.min(1,o[n]*g))*32767,true);
+    url=URL.createObjectURL(new Blob([buf],{type:"audio/wav"}));
+    return url;
+  }
+  window.__buildSound=build;
+  setTimeout(()=>{ try{ build(); }catch(e){} },1500);
+  function label(){ const b=$("sndBtn"); b.setAttribute("aria-pressed",String(on)); b.textContent="♪ 音楽 "+(on?"ON":"OFF"); }
+  let manualOff=false;
+  const DBG=/[?&]debug/.test(location.search); let dbg=null, lastErr="-";
+  function dlog(){ if(!DBG) return; if(!dbg){ dbg=document.createElement("div"); dbg.id="dbg"; dbg.style.cssText="position:fixed;left:6px;bottom:6px;z-index:99;background:rgba(0,0,0,.75);color:#0f0;font:11px/1.4 monospace;padding:4px 6px;border-radius:4px;max-width:90vw;pointer-events:none"; document.body.appendChild(dbg); }
+    dbg.textContent="v3 on="+on+" paused="+(au?au.paused:"-")+" err="+lastErr+" audioSession="+(navigator.audioSession?navigator.audioSession.type:"none"); }
+  async function setOn(v,fromStart){
+    if(v){
+      try{ if(navigator.audioSession) navigator.audioSession.type="playback"; }catch(e){}
+      try{
+        if(!au){ au=new Audio(); au.loop=true; au.setAttribute("playsinline",""); au.src=build();
+          ["playing","pause","error","stalled"].forEach(ev=>au.addEventListener(ev,()=>{ if(ev==="error") lastErr="mediaerr"+(au.error?au.error.code:""); dlog(); })); }
+        await au.play(); on=true; lastErr="-";
+      }catch(e){
+        on=false; lastErr=(e&&e.name)||"error";
+        if(fromStart){ toast("音楽を始められませんでした（"+lastErr+"）。右上の♪から押してください",6000); document.addEventListener("pointerup",()=>{ if(!on && !manualOff) setOn(true); },{once:true,capture:true}); }
+        else toast("この端末では音楽を流せません");
+      }
+    }else{ on=false; if(au) au.pause(); }
+    label(); dlog(); track("sound_toggle",{on:on?1:0});
+  }
+  $("sndBtn").addEventListener("click",()=>{ manualOff=on; setOn(!on); });
+  window.__startSound=function(){ if(!on && !manualOff) setOn(true,true); };
+  dlog();
+  document.addEventListener("visibilitychange",()=>{ if(!au||!on) return; if(document.hidden) au.pause(); else au.play().catch(()=>{}); });
 })();
 </script>
 </body>
