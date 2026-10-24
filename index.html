@@ -226,7 +226,7 @@ body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid r
 
 <section class="screen" id="result">
   <svg class="ayatori draw" id="rsvg" viewBox="0 0 300 200" aria-hidden="true"></svg>
-  <p class="rtype">あなたの結び目は</p>
+  <p class="rtype">あなたの恋の癖は</p>
   <h1 class="rname mincho" id="rname"></h1>
   <p class="rcatch" id="rcatch"></p>
 
@@ -256,7 +256,7 @@ body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid r
 <script>
 /* ===== 設定：ボタンの行き先（noteのURL） ===== */
 const AFFILIATE_URL = "https://note.com/koino_ayatori/n/nd3b10ac212e7";
-const SHARE_TAG = "#恋の結び目診断";
+const SHARE_TAG = "#恋の癖診断";
 
 const QUESTIONS = [
   {axis:"A", q:"既読がついたまま、返事がこない。", a:["自分からもう一通送る","返ってくるまで待つ"]},
@@ -278,7 +278,7 @@ const TYPES = {
  str:["好きな人にまっすぐ気持ちを向けられる","関係を簡単にあきらめない","相手の変化にすぐ気づける"],
  mom:["返事が来るまで、他のことが手につかない","確かめた直後だけ、少し安心する","安心が続かず、また確かめたくなる"],
  mechH:"確かめるほど、不安は育つ",
- mech:["確かめる連絡は、一瞬だけ不安を消してくれます。でもその安心が癖になり、次の不安はもう少し大きくなって戻ってきます。","相手が離れていくのではありません。確かめる回数が増えるほど、相手を信じる練習をしなくなっている。結び目は、そこで固くなります。"],
+ mech:["確かめる連絡は、一瞬だけ不安を消してくれます。でもその安心が癖になり、次の不安はもう少し大きくなって戻ってきます。","相手が離れていくのではありません。確かめる回数が増えるほど、相手を信じる練習をしなくなっている。恋の癖は、そこで強くなります。"],
  end:["確かめる連絡が増えるほど、", "彼の返事は短くなっていく。", "そしてある夜、「少し疲れた」と", "言われるかもしれません。"],
  words:["「どこにも行かないよ」","「連絡しなくても、ちゃんと好きだよ」"],
  tonight:"送ろうとしたメッセージを、下書きのまま朝まで置いてください。朝になっても送りたければ、それは不安ではなく本音です。",
@@ -430,7 +430,7 @@ async function shareResult(){
   track("share_click",{type_name:TYPES[lastKey].name});
   const t=TYPES[lastKey];
   const url=location.href.split("#")[0];
-  const text="私の恋の結び目は「"+t.name+"」でした。\n"+t.catch+"\n"+SHARE_TAG+"\n";
+  const text="私の恋の癖は「"+t.name+"」でした。\n"+t.catch+"\n"+SHARE_TAG+"\n";
   if(navigator.share){ try{ await navigator.share({text, url}); return; }catch(e){ if(e && e.name==="AbortError") return; } }
   try{ await navigator.clipboard.writeText(text+url); toast("結果をコピーしました"); }
   catch(e){ toast("コピーできませんでした。画面を長押ししてコピーしてください"); }
