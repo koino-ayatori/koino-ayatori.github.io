@@ -243,6 +243,11 @@ body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid r
     <a class="btn" id="ctaLink" href="#" target="_blank" rel="noopener">幸せな恋に変える方法を読む</a>
   </div>
 
+  <div class="cta-mini">
+    <p>まだ迷っている人は<br>毎日の恋の癖のヒントをインスタで🧶</p>
+    <a class="btn" id="instaLink" href="https://www.instagram.com/koino_ayatori/" target="_blank" rel="noopener">@koino_ayatori をフォロー</a>
+  </div>
+
   <div class="row">
     <button class="ghost" id="copyBtn">シェアする</button>
     <button class="ghost" id="retryBtn">もう一度やる</button>
@@ -442,6 +447,7 @@ $("ctaLink").href=AFFILIATE_URL;
 $("ctaLink").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"bottom",utm_source:UTM_SOURCE}));
 $("ctaImg").href=AFFILIATE_URL;
 $("ctaImg").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"cover",utm_source:UTM_SOURCE}));
+$("instaLink").addEventListener("click",()=>track("insta_click",{type_name:lastKey?TYPES[lastKey].name:"",utm_source:UTM_SOURCE}));
 $("startBtn").onclick=()=>{ if(window.__startSound) window.__startSound(); answers=[]; idx=0; clear(); track("quiz_start"); show("quiz"); renderQ(); };
 $("resumeBtn").onclick=()=>{ if(window.__startSound) window.__startSound(); const v=load(); if(v){ answers=v.answers; idx=v.idx; } show("quiz"); renderQ(); };
 $("backBtn").onclick=()=>{ if(idx>0){ idx--; save(); renderQ(); } };
