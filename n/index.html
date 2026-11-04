@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>恋のあやとり</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LZFV1CB90X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LZFV1CB90X');
+</script>
+<noscript><meta http-equiv="refresh" content="0;url=https://note.com/koino_ayatori"></noscript>
+<style>
+  html,body{margin:0;height:100%;background:#faf6f3;color:#4a3f3a;font-family:"Hiragino Mincho ProN","Yu Mincho",serif}
+  body{display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;box-sizing:border-box}
+  p{margin:0 0 16px;font-size:16px;line-height:1.8}
+  a{color:#4a3f3a}
+</style>
+</head>
+<body>
+<div>
+  <p>noteへ移動します</p>
+  <p><a id="go" href="https://note.com/koino_ayatori">移動しない場合はこちら</a></p>
+</div>
+<script>
+(function(){
+  var NOTE_URL = "https://note.com/koino_ayatori";
+  var utm = "(none)";
+  try { utm = new URLSearchParams(location.search).get("utm_source") || "(none)"; } catch(e){}
+  var done = false;
+  function go(){
+    if (done) return;
+    done = true;
+    location.replace(NOTE_URL);
+  }
+  try {
+    if (window.gtag) {
+      gtag('event', 'note_redirect', {
+        utm_source: utm,
+        destination: 'note_shelf',
+        transport_type: 'beacon',
+        event_callback: go,
+        event_timeout: 800
+      });
+    }
+  } catch(e){}
+  setTimeout(go, 900);
+})();
+</script>
+</body>
+</html>
