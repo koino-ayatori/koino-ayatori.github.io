@@ -207,6 +207,8 @@ section.blk,.cta{padding-left:1.1rem;padding-right:1.1rem}
 .cta .voice .vh{font-size:.75rem;color:var(--ink-soft);margin:0 0 .4rem}
 .cta .voice .vb{font-size:.875rem;line-height:1.85;margin:0;word-break:auto-phrase}
 .cta .voice .vn{font-size:.7rem;color:var(--ink-soft);margin:.5rem 0 0}
+.cta .subh2{font-size:.8rem;color:var(--ink-soft);text-align:center;margin:0 0 .6rem}
+.cta .tok{font-size:.8rem;line-height:1.8;color:var(--ink-soft);text-align:center;margin:0 0 1rem;word-break:auto-phrase}
 .cta .ways li{font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;font-weight:700;font-size:.84rem;letter-spacing:-.01em;padding-left:.8rem;padding-right:.6rem;border-left:3px solid var(--thread)}
 .cta .plus{margin:0 0 1rem;text-align:center;font-size:.85rem;font-weight:700;color:var(--thread)}
 .q{min-height:auto}
@@ -269,18 +271,23 @@ section.blk,.cta{padding-left:1.1rem;padding-right:1.1rem}
 
   <div class="cta hero">
     <p class="lead-in mincho">▼この未来を変える方法▼</p>
-    <p class="two mincho"><span>あなたが彼に大切にされる方法が、</span><span>noteにまとめてあります。</span></p>
+    <p class="two mincho"><span id="ctaT1"></span><span>大切にされる方法が、</span><span>noteにまとめてあります。</span></p>
+    <p class="subh2">読んだあとの毎日</p>
     <ul class="list bubble ways">
-      <li>彼から求められるようになる方法</li>
-      <li>信頼を深め、一生のパートナーになる方法</li>
+      <li>彼の返信を待つ夜が、自分の時間に変わる</li>
+      <li>仕事中に、スマホを見なくなる</li>
+      <li>彼に「会いたい」と、素直に言える</li>
+      <li>不安に使っていた時間とお金を、自分に使える</li>
     </ul>
     <p class="plus">＋ そのまま送れるLINEの言い方つき</p>
-    <p class="two"><span>30分で読めて、今夜から試せます。</span><span>まずは無料部分だけでも。</span></p>
+    <p class="two"><span>恋愛コンサルは、高額なものが多い。</span><span>noteは、30分で読めて、</span><span>今夜から試せます。</span></p>
     <div class="voice">
       <p class="vh">読者さんの声</p>
       <p class="vb">「既読スルーばかりだった彼から、自分から誘われるようになりました！<br>追うのをやめて追いLINEを我慢したら、<span style="white-space:nowrap">彼の方から</span>『今週いつ会える？』とLINEが来てびっくりしました！」</p>
       <p class="vn">※個人の感想です。結果には個人差があります。</p>
     </div>
+    <p class="tok">note購入者には、恋相談ヒアリングの特典つき。<br>テキストで1回お返しします。<br>今後、受付を終える可能性があります。</p>
+    <p class="two"><span>まずは無料部分だけでも。</span></p>
     <a class="btn" id="ctaLink" href="#" target="_blank" rel="noopener">無料部分を読む</a>
   </div>
 
@@ -451,6 +458,7 @@ function finish(){
   $("rstep").innerHTML=li(t.step);
   $("rwords").innerHTML=t.words.map(w=>'<div class="quote">'+esc(w)+'</div>').join("");
   $("rend").innerHTML=t.end.map(l=>"<span>"+esc(l)+"</span>").join("");
+  $("ctaT1").textContent=t.name+"の彼に、";
   const svg=$("rsvg"); svg.innerHTML=shapeSVG(key).replace(/r="7"/g,'r="5"');
   svg.classList.remove("draw"); void svg.offsetWidth; svg.classList.add("draw");
   track("quiz_complete",{type_name:t.name,type_key:key});
