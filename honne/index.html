@@ -262,7 +262,7 @@ section.blk,.cta{padding-left:1.1rem;padding-right:1.1rem}
   <section class="blk"><h2 class="mincho">彼の本音</h2><div id="rhonne"></div></section>
   <section class="blk"><h2 class="mincho">彼の愛情サイン</h2><ul class="list ring" id="rsig"></ul></section>
   <section class="blk"><h2 class="mincho">あなたが苦しくなりやすい瞬間</h2><ul class="list bubble" id="rmom"></ul></section>
-  <section class="blk way"><h2 class="mincho">彼に大切にされる方法</h2>
+  <section class="blk way"><h2 class="mincho" id="rway">彼に大切にされる方法</h2>
     <p class="fut mincho" id="rfut"></p>
     <p class="subh">そのためにすること</p>
     <ul class="list ring" id="rstep"></ul>
@@ -379,7 +379,8 @@ const TYPES = {
  honne:["「好きなのは、本当だよ」","「自分の時間も、守りたい」"],
  sig:["メッセージでは、好きと言う","誘えば、予定を合わせてくれる","会えない理由を、説明してくれる"],
  mom:["言葉と行動が、合っていない","会いたいのは、私だけに見える","会えない理由が、言い訳に聞こえる"],
- fut:"言葉どおり、彼が会いに来る未来",
+ way:"彼の「会いたい」を、会う約束につなげる方法",
+ fut:"「会いたい」が、予定になる関係へ",
  step:["会えない日は、追わずに待つ","会えた日に、「うれしい」と伝える"],
  words:["「言葉、うれしかったよ」","「ひとりの時間も、大事にしてね」"],
  end:["追うほど、彼は言葉だけで済ませます。","言葉だけで、関係が保てるからです。","会う日が、減るかもしれません。"]},
@@ -456,6 +457,7 @@ function finish(){
   $("rhonne").innerHTML=t.honne.map(w=>'<div class="quote">'+esc(w)+'</div>').join("");
   $("rsig").innerHTML=li(t.sig);
   $("rmom").innerHTML=li(t.mom);
+  $("rway").textContent=t.way||"彼に大切にされる方法";
   $("rfut").textContent=t.fut;
   $("rstep").innerHTML=li(t.step);
   $("rwords").innerHTML=t.words.map(w=>'<div class="quote">'+esc(w)+'</div>').join("");
