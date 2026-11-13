@@ -463,7 +463,7 @@ function finish(){
   $("ctaT1").textContent=t.name+"の彼がいる、あなたへ。";
   const svg=$("rsvg"); svg.innerHTML=shapeSVG(key).replace(/r="7"/g,'r="5"');
   svg.classList.remove("draw"); void svg.offsetWidth; svg.classList.add("draw");
-  track("quiz_complete",{type_name:t.name,type_key:key});
+  track("quiz_complete",{type_name:t.name,type_key:key,utm_source:UTM_SOURCE});
   clear(); show("result");
 }
 
@@ -483,7 +483,7 @@ try{ UTM_SOURCE=new URLSearchParams(location.search).get("utm_source")||"(none)"
 $("ctaLink").href=NOTE_URL;
 $("ctaLink").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"bottom",utm_source:UTM_SOURCE}));
 $("instaLink").addEventListener("click",()=>track("insta_click",{type_name:lastKey?TYPES[lastKey].name:"",utm_source:UTM_SOURCE}));
-$("startBtn").onclick=()=>{ if(window.__startSound) window.__startSound(); answers=[]; idx=0; clear(); track("quiz_start"); show("quiz"); renderQ(); };
+$("startBtn").onclick=()=>{ if(window.__startSound) window.__startSound(); answers=[]; idx=0; clear(); track("quiz_start",{utm_source:UTM_SOURCE}); show("quiz"); renderQ(); };
 $("resumeBtn").onclick=()=>{ if(window.__startSound) window.__startSound(); const v=load(); if(v){ answers=v.answers; idx=v.idx; } show("quiz"); renderQ(); };
 $("backBtn").onclick=()=>{ if(idx>0){ idx--; save(); renderQ(); } };
 $("retryBtn").onclick=()=>{ answers=[]; idx=0; track("quiz_retry"); show("intro"); };
