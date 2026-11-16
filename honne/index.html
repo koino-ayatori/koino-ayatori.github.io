@@ -213,6 +213,18 @@ section.blk,.cta{padding-left:1.1rem;padding-right:1.1rem}
 .cta .subh2{font-size:.8rem;color:var(--ink-soft);text-align:center;margin:0 0 .6rem}.cta .ways li{font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;font-weight:700;font-size:.84rem;letter-spacing:-.01em;padding-left:.8rem;padding-right:.6rem;border-left:3px solid var(--thread)}
 .cta .plus{margin:0 0 1rem;text-align:center;font-size:.85rem;font-weight:700;color:var(--thread)}
 .q{min-height:auto}
+.gapitem{border-left:3px solid var(--thread);padding:.2rem 0 .2rem .8rem;margin:0 0 1.1rem}
+.gapitem b{display:block;font-size:1rem;margin:0 0 .25rem}
+.gapitem p{font-size:.85rem;line-height:1.8;margin:.35rem 0 0;color:var(--ink-soft)}
+.gapmeter{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--ink-soft)}
+.gapmeter i{flex:1;height:6px;border-radius:3px;background:var(--line);position:relative;overflow:hidden}
+.gapmeter i span{position:absolute;inset:0 auto 0 0;background:var(--thread);border-radius:3px}
+.gaprisk{font-size:.95rem;line-height:1.9;font-weight:700;text-align:center;margin:1.2rem 0 0;padding:.9rem .6rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gapnote{font-size:.7rem;color:var(--ink-soft);margin:.2rem 0 0}
+.fixbook{background:var(--paper);border:1.5px solid var(--thread);border-radius:.9rem;padding:1rem;margin:.4rem 0 0;text-align:center}
+.fixbook .ft{font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;font-weight:700;font-size:1rem;line-height:1.7;margin:0 0 .4rem}
+.fixbook .fd{font-size:.85rem;line-height:1.8;margin:0 0 .9rem}
+.fixbook .btn{display:block;box-sizing:border-box;background:var(--thread);color:var(--on-thread);font-weight:700;text-decoration:none;text-align:center;border-radius:999px;padding:1rem 1.5rem}
 </style>
 </head>
 <body class="onintro">
@@ -269,6 +281,19 @@ section.blk,.cta{padding-left:1.1rem;padding-right:1.1rem}
   </section>
   <section class="blk"><h2 class="mincho">彼が本当は言われたい言葉</h2><div id="rwords"></div></section>
   <section class="blk"><h2 class="mincho">このままだと</h2><p id="rend"></p></section>
+
+  <section class="blk" id="gapBlk">
+    <h2 class="mincho">あなたに足りないのは、この2つ</h2>
+    <div id="rgap"></div>
+    <p class="gapnote">※10問の答えからの見立てです。</p>
+    <p class="gaprisk mincho" id="rrisk"></p>
+    <h2 class="mincho" style="margin-top:1.4rem">あなたに必要なのは、この1冊</h2>
+    <div class="fixbook">
+      <p class="ft" id="fixTitle"></p>
+      <p class="fd" id="fixDesc"></p>
+      <a class="btn" id="fixLink" href="#" target="_blank" rel="noopener">無料部分を読んでみる</a>
+    </div>
+  </section>
 
   <div class="cta hero">
     <p class="lead-in mincho">▼この未来を変える方法▼</p>
@@ -327,6 +352,38 @@ const QUESTIONS = [
   {axis:"C", q:"悩みがあるときの彼は？", a:["あなたに相談する","ひとりで考える"]},
   {axis:"A", q:"記念日や誕生日は？", a:["彼が考えてくれる","私が準備することが多い"]}
 ];
+
+/* ===== 足りないもの（軸ごと）と、必要なnote ===== */
+const GAPS = {
+  A:[{name:"彼の気持ちに、言葉で応える力",why:"動いてくれる彼に、気持ちが返らないと、彼の熱は少しずつ下がっていきます。",book:"book2",risk:"動いてくれる彼に甘えたままだと、\nいつか彼が疲れてしまうかもしれません。"},
+     {name:"彼が動きたくなる余白をつくる力",why:"いつも私から動くので、彼が動く理由がなくなっています。",book:"book1",risk:"あなたが動くほど、彼は待つだけになって、\n追いかける恋が続くかもしれません。"}],
+  B:[{name:"言葉に頼らず、信頼を育てる力",why:"言葉で安心している分、言葉が減った日に、不安が大きくなります。",book:"book2",risk:"「好き」が減った日に、\n一気に不安になってしまうかもしれません。"},
+     {name:"言葉にしない本音を読み取る力",why:"言葉がないと、愛情がないように感じて、不安になってしまいます。",book:"book2",risk:"言葉がないことを、気持ちがないと思いこんで、\nすれ違いが続いてしまうかもしれません。"}],
+  C:[{name:"自分の時間を大切にする力",why:"二人の時間が中心になると、自分の毎日が後回しになります。",book:"book1",risk:"二人の時間に頼るほど、\n会えない日に、心が揺れやすくなるかもしれません。"},
+     {name:"彼のひとりの時間を、信じて待つ力",why:"彼が距離を取ると、離れていくように感じて、不安になってしまいます。",book:"iriguchi",risk:"彼のひとりの時間を不安で埋めるほど、\n彼との距離が開いていくかもしれません。"}]
+};
+const BOOKS = {
+  iriguchi:{title:"『【完全保存版】彼に振り回されない恋の仕方』",desc:"不安な夜に、何を考えて、どう動くか。<br>彼の反応に振り回されない毎日へ。"},
+  book1:{title:"『尽くす恋から愛される恋へ』",desc:"自分ばかり頑張る恋から、<br>彼に求められる恋へ。"},
+  book2:{title:"『すれ違いを絆に変える』",desc:"本音を言うほど、すれ違う関係から、<br>本音を言うほど安心できる関係へ。"}
+};
+let lastGaps=[], lastBook="";
+function renderGap(score,cnt,side){
+  const ks=["A","B","C"].map(k=>({k, s:side(k), str:Math.abs(score[k]/cnt[k]-0.5)}))
+    .sort((a,b)=>b.str-a.str).slice(0,2);
+  const items=ks.map(o=>GAPS[o.k][o.s]);
+  lastGaps=items.map(g=>g.name); lastBook=items[0].book;
+  $("rgap").innerHTML=ks.map((o,i)=>{
+    const g=items[i]; const pct=Math.round(55+o.str*90);
+    return '<div class="gapitem"><b class="mincho">'+esc(g.name)+'</b>'+
+      '<div class="gapmeter">足りない度<i><span style="width:'+pct+'%"></span></i></div>'+
+      '<p>'+esc(g.why)+'</p></div>';
+  }).join("");
+  $("rrisk").innerHTML="このまま恋愛を続けてしまったら、<br><br>"+esc(items[0].risk).replace(/\n/g,"<br>");
+  const bk=BOOKS[lastBook];
+  $("fixTitle").textContent=bk.title;
+  $("fixDesc").innerHTML=bk.desc;
+}
 
 const TYPES = {
 "000":{name:"本結び",catch:"愛情を、自分から結びに来る彼。",
@@ -460,10 +517,11 @@ function finish(){
   $("rstep").innerHTML=li(t.step);
   $("rwords").innerHTML=t.words.map(w=>'<div class="quote">'+esc(w)+'</div>').join("");
   $("rend").innerHTML=t.end.map(l=>"<span>"+esc(l)+"</span>").join("");
+  renderGap(score,cnt,side);
   $("ctaT1").textContent=t.name+"の彼がいる、あなたへ。";
   const svg=$("rsvg"); svg.innerHTML=shapeSVG(key).replace(/r="7"/g,'r="5"');
   svg.classList.remove("draw"); void svg.offsetWidth; svg.classList.add("draw");
-  track("quiz_complete",{type_name:t.name,type_key:key,utm_source:UTM_SOURCE});
+  track("quiz_complete",{type_name:t.name,type_key:key,gaps:lastGaps.join("|"),book:lastBook,utm_source:UTM_SOURCE});
   clear(); show("result");
 }
 
@@ -481,6 +539,8 @@ async function shareResult(){
 let UTM_SOURCE="(none)";
 try{ UTM_SOURCE=new URLSearchParams(location.search).get("utm_source")||"(none)"; }catch(e){}
 $("ctaLink").href=NOTE_URL;
+$("fixLink").href=NOTE_URL;
+$("fixLink").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"gap",book:lastBook,utm_source:UTM_SOURCE}));
 $("ctaLink").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"bottom",utm_source:UTM_SOURCE}));
 $("instaLink").addEventListener("click",()=>track("insta_click",{type_name:lastKey?TYPES[lastKey].name:"",utm_source:UTM_SOURCE}));
 $("startBtn").onclick=()=>{ if(window.__startSound) window.__startSound(); answers=[]; idx=0; clear(); track("quiz_start",{utm_source:UTM_SOURCE}); show("quiz"); renderQ(); };
