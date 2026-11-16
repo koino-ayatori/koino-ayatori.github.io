@@ -199,6 +199,17 @@ body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid r
 .cta .voice .vh{font-size:.75rem;color:var(--ink-soft);margin:0 0 .4rem}
 .cta .voice .vb{font-size:.875rem;line-height:1.85;margin:0;word-break:auto-phrase}
 .cta .voice .vn{font-size:.7rem;color:var(--ink-soft);margin:.5rem 0 0}
+.gapitem{border-left:3px solid var(--thread);padding:.2rem 0 .2rem .8rem;margin:0 0 1.1rem}
+.gapitem b{display:block;font-size:1rem;margin:0 0 .25rem}
+.gapitem p{font-size:.85rem;line-height:1.8;margin:.35rem 0 0;color:var(--ink-soft)}
+.gapmeter{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--ink-soft)}
+.gapmeter i{flex:1;height:6px;border-radius:3px;background:var(--line);position:relative;overflow:hidden}
+.gapmeter i span{position:absolute;inset:0 auto 0 0;background:var(--thread);border-radius:3px}
+.gapnote{font-size:.7rem;color:var(--ink-soft);margin:.2rem 0 0}
+.fixbook{background:var(--paper);border:1.5px solid var(--thread);border-radius:.9rem;padding:1rem;margin:.4rem 0 0;text-align:center}
+.fixbook .ft{font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;font-weight:700;font-size:1rem;line-height:1.7;margin:0 0 .4rem}
+.fixbook .fd{font-size:.85rem;line-height:1.8;margin:0 0 .9rem}
+.fixbook .btn{display:block;box-sizing:border-box;background:var(--thread);color:var(--on-thread);font-weight:700;text-decoration:none;text-align:center}
 </style>
 </head>
 <body class="onintro">
@@ -249,6 +260,18 @@ body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid r
   <section class="blk"><h2 class="mincho">あなたとの相性</h2><div id="rmatch"></div></section>
   <section class="blk"><h2 class="mincho">本当は言われたい言葉</h2><div id="rwords"></div></section>
   <section class="blk"><h2 class="mincho">この恋の未来</h2><p id="rend"></p></section>
+
+  <section class="blk" id="gapBlk">
+    <h2 class="mincho">あなたに足りないのは、この2つ</h2>
+    <div id="rgap"></div>
+    <p class="gapnote">※10問の答えからの見立てです。</p>
+    <h2 class="mincho" style="margin-top:1.4rem">それを補うのが、この1冊</h2>
+    <div class="fixbook">
+      <p class="ft" id="fixTitle"></p>
+      <p class="fd" id="fixDesc"></p>
+      <a class="btn" id="fixLink" href="#" target="_blank" rel="noopener">無料部分を読んでみる</a>
+    </div>
+  </section>
 
   <div class="cta hero">
     <p class="lead-in mincho">▼この未来を変える方法▼</p>
@@ -307,6 +330,37 @@ const QUESTIONS = [
   {axis:"A", q:"好きな人からの連絡が減ってきた。", a:["自分から話題を振って増やそうとする","相手に合わせて、こちらも減らす"]}
 ];
 const AXES = {A:["追う","待つ"], B:["相手を疑う","自分を責める"], C:["離せない","先に切る"]};
+
+/* ===== 足りないもの（軸ごと）と、補うnote ===== */
+const GAPS = {
+  A:[{name:"待てる余裕",why:"不安になると、すぐ動いてしまう。動くほど、不安は大きくなります。",book:"iriguchi"},
+     {name:"自分から伝える力",why:"待っているあいだに、気持ちは伝わらないまま終わってしまいます。",book:"book1"}],
+  B:[{name:"事実と想像を分ける力",why:"まだ起きていないことを、頭の中で事実にしてしまいます。",book:"iriguchi"},
+     {name:"彼の反応で、自分の価値を決めない力",why:"彼のひと言で自分を責めて、一日が終わってしまいます。",book:"iriguchi"}],
+  C:[{name:"自分軸",why:"彼が中心の毎日で、自分のことがいつも後回しになります。",book:"book1"},
+     {name:"話し合って、仲直りする力",why:"ぶつかる前に、自分から関係を終わらせてしまいます。",book:"book2"}]
+};
+const BOOKS = {
+  iriguchi:{title:"『【完全保存版】彼に振り回されない恋の仕方』",desc:"不安な夜に、何を考えて、どう動くか。<br>彼の反応に振り回されない毎日へ。"},
+  book1:{title:"『尽くす恋から愛される恋へ』",desc:"自分ばかり頑張る恋から、<br>彼に求められる恋へ。"},
+  book2:{title:"『すれ違いを絆に変える』",desc:"本音を言うほど、すれ違う関係から、<br>本音を言うほど安心できる関係へ。"}
+};
+let lastGaps=[], lastBook="";
+function renderGap(score,cnt,side){
+  const ks=["A","B","C"].map(k=>({k, s:side(k), str:Math.abs(score[k]/cnt[k]-0.5)}))
+    .sort((a,b)=>b.str-a.str).slice(0,2);
+  const items=ks.map(o=>GAPS[o.k][o.s]);
+  lastGaps=items.map(g=>g.name); lastBook=items[0].book;
+  $("rgap").innerHTML=ks.map((o,i)=>{
+    const g=items[i]; const pct=Math.round(55+o.str*90);
+    return '<div class="gapitem"><b class="mincho">'+esc(g.name)+'</b>'+
+      '<div class="gapmeter">足りない度<i><span style="width:'+pct+'%"></span></i></div>'+
+      '<p>'+esc(g.why)+'</p></div>';
+  }).join("");
+  const bk=BOOKS[lastBook];
+  $("fixTitle").textContent=bk.title;
+  $("fixDesc").innerHTML=bk.desc;
+}
 
 const TYPES = {
 "000":{name:"からまり結び",catch:"追いかけて、疑って、それでも離れられない。",
@@ -451,6 +505,7 @@ function finish(){
   $("rmom").innerHTML=t.mom.map(s=>"<li>"+esc(s)+"</li>").join("");
   const x=EXTRA[key];
   $("rend").innerHTML=t.end.map(l=>"<span>"+esc(l)+"</span>").join("");
+  renderGap(score,cnt,side);
   $("ctaT1").textContent=t.name+"のあなたへ。";
   $("rwords").innerHTML=t.words.map(w=>'<div class="quote">'+esc(w)+'</div>').join("");
   const m = (arr,kind)=> arr.map(k=>'<div class="match"><div class="mi"><svg viewBox="0 0 300 200" aria-hidden="true">'+shapeSVG(k)+'</svg><span class="badge '+(kind==="good"?"g":"b")+'">'+(kind==="good"?"◎":"×")+'</span></div><div>'+
@@ -458,7 +513,7 @@ function finish(){
   $("rmatch").innerHTML='<p class="subh">'+MATCH_NOTE.good+'</p>'+m(t.good,"good")+'<p class="subh">'+MATCH_NOTE.bad+'</p>'+m(t.bad,"bad");
   const svg=$("rsvg"); svg.innerHTML=shapeSVG(key).replace(/r="7"/g,'r="5"');
   svg.classList.remove("draw"); void svg.offsetWidth; svg.classList.add("draw");
-  track("quiz_complete",{type_name:t.name,type_key:key,utm_source:UTM_SOURCE});
+  track("quiz_complete",{type_name:t.name,type_key:key,gaps:lastGaps.join("|"),book:lastBook,utm_source:UTM_SOURCE});
   clear(); show("result");
 }
 
@@ -478,6 +533,8 @@ try{ UTM_SOURCE=new URLSearchParams(location.search).get("utm_source")||"(none)"
 $("ctaLink").href=AFFILIATE_URL;
 $("ctaLink").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"bottom",utm_source:UTM_SOURCE}));
 $("ctaImg").href=AFFILIATE_URL;
+$("fixLink").href=AFFILIATE_URL;
+$("fixLink").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"gap",book:lastBook,utm_source:UTM_SOURCE}));
 $("ctaImg").addEventListener("click",()=>track("cta_click",{type_name:lastKey?TYPES[lastKey].name:"",position:"cover",utm_source:UTM_SOURCE}));
 $("instaLink").addEventListener("click",()=>track("insta_click",{type_name:lastKey?TYPES[lastKey].name:"",utm_source:UTM_SOURCE}));
 $("startBtn").onclick=()=>{ if(window.__startSound) window.__startSound(); answers=[]; idx=0; clear(); track("quiz_start",{utm_source:UTM_SOURCE}); show("quiz"); renderQ(); };
