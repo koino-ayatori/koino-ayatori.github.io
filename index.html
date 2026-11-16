@@ -205,6 +205,7 @@ body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid r
 .gapmeter{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--ink-soft)}
 .gapmeter i{flex:1;height:6px;border-radius:3px;background:var(--line);position:relative;overflow:hidden}
 .gapmeter i span{position:absolute;inset:0 auto 0 0;background:var(--thread);border-radius:3px}
+.gaprisk{font-size:.95rem;line-height:1.9;font-weight:700;text-align:center;margin:1.2rem 0 0;padding:.9rem .6rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .gapnote{font-size:.7rem;color:var(--ink-soft);margin:.2rem 0 0}
 .fixbook{background:var(--paper);border:1.5px solid var(--thread);border-radius:.9rem;padding:1rem;margin:.4rem 0 0;text-align:center}
 .fixbook .ft{font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;font-weight:700;font-size:1rem;line-height:1.7;margin:0 0 .4rem}
@@ -265,7 +266,8 @@ body.onintro .snd{background:rgba(255,255,255,.14);color:#fff;border:1px solid r
     <h2 class="mincho">あなたに足りないのは、この2つ</h2>
     <div id="rgap"></div>
     <p class="gapnote">※10問の答えからの見立てです。</p>
-    <h2 class="mincho" style="margin-top:1.4rem">それを補うのが、この1冊</h2>
+    <p class="gaprisk mincho" id="rrisk"></p>
+    <h2 class="mincho" style="margin-top:1.4rem">あなたに必要なのは、この1冊</h2>
     <div class="fixbook">
       <p class="ft" id="fixTitle"></p>
       <p class="fd" id="fixDesc"></p>
@@ -333,12 +335,12 @@ const AXES = {A:["追う","待つ"], B:["相手を疑う","自分を責める"],
 
 /* ===== 足りないもの（軸ごと）と、補うnote ===== */
 const GAPS = {
-  A:[{name:"待てる余裕",why:"不安になると、すぐ動いてしまう。動くほど、不安は大きくなります。",book:"iriguchi"},
-     {name:"自分から伝える力",why:"待っているあいだに、気持ちは伝わらないまま終わってしまいます。",book:"book1"}],
-  B:[{name:"事実と想像を分ける力",why:"まだ起きていないことを、頭の中で事実にしてしまいます。",book:"iriguchi"},
-     {name:"彼の反応で、自分の価値を決めない力",why:"彼のひと言で自分を責めて、一日が終わってしまいます。",book:"iriguchi"}],
-  C:[{name:"自分軸",why:"彼が中心の毎日で、自分のことがいつも後回しになります。",book:"book1"},
-     {name:"話し合って、仲直りする力",why:"ぶつかる前に、自分から関係を終わらせてしまいます。",book:"book2"}]
+  A:[{name:"待てる余裕",why:"不安になると、すぐ動いてしまう。動くほど、不安は大きくなります。",book:"iriguchi",risk:"確かめる連絡が増えるほど、彼との距離が離れていくかもしれません。"},
+     {name:"自分から伝える力",why:"待っているあいだに、気持ちは伝わらないまま終わってしまいます。",book:"book1",risk:"気持ちを伝えないまま、待つだけの恋が終わってしまうかもしれません。"}],
+  B:[{name:"事実と想像を分ける力",why:"まだ起きていないことを、頭の中で事実にしてしまいます。",book:"iriguchi",risk:"まだ起きていない別れに、何度も心をすり減らしてしまうかもしれません。"},
+     {name:"彼の反応で、自分の価値を決めない力",why:"彼のひと言で自分を責めて、一日が終わってしまいます。",book:"iriguchi",risk:"彼のひと言で落ち込む毎日が、ずっと続いてしまうかもしれません。"}],
+  C:[{name:"自分軸",why:"彼が中心の毎日で、自分のことがいつも後回しになります。",book:"book1",risk:"彼に尽くすほど、自分の毎日がなくなっていくかもしれません。"},
+     {name:"話し合って、仲直りする力",why:"ぶつかる前に、自分から関係を終わらせてしまいます。",book:"book2",risk:"好きなのに、自分から終わらせる恋をくり返してしまうかもしれません。"}]
 };
 const BOOKS = {
   iriguchi:{title:"『【完全保存版】彼に振り回されない恋の仕方』",desc:"不安な夜に、何を考えて、どう動くか。<br>彼の反応に振り回されない毎日へ。"},
@@ -357,6 +359,7 @@ function renderGap(score,cnt,side){
       '<div class="gapmeter">足りない度<i><span style="width:'+pct+'%"></span></i></div>'+
       '<p>'+esc(g.why)+'</p></div>';
   }).join("");
+  $("rrisk").innerHTML="このまま恋愛を続けてしまったら、<br>"+esc(items[0].risk);
   const bk=BOOKS[lastBook];
   $("fixTitle").textContent=bk.title;
   $("fixDesc").innerHTML=bk.desc;
