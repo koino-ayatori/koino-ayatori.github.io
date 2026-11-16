@@ -29,19 +29,43 @@
 <script>
 (function(){
   var NOTE_URL = "https://note.com/koino_ayatori";
-  var utm = "(none)";
-  try { utm = new URLSearchParams(location.search).get("utm_source") || "(none)"; } catch(e){}
+  // 紹介リンク用の飛び先。記事のURLを入れると ?to= で指定できる（空なら棚へ）
+  var DEST = {
+    shelf:    NOTE_URL,
+    iriguchi: "", // 入口980円『【完全保存版】彼に振り回されない恋の仕方』
+    book1:    "", // 1冊目『尽くす恋から愛される恋へ』
+    book2:    ""  // 2冊目『すれ違いを絆に変える』
+  };
+  var q = null;
+  try { q = new URLSearchParams(location.search); } catch(e){}
+  function clean(v){ return (v || "").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 30); }
+  var ref = q ? clean(q.get("ref")) : "";
+  var to  = q ? clean(q.get("to"))  : "";
+  var utm = (q && q.get("utm_source")) || "(none)";
+  if (ref) utm = "aff_" + ref;
+  var dest = (to && DEST[to]) ? DEST[to] : NOTE_URL;
+  var destName = (to && DEST[to]) ? to : "shelf";
+  try { document.getElementById("go").href = dest; } catch(e){}
   var done = false;
   function go(){
     if (done) return;
     done = true;
-    location.replace(NOTE_URL);
+    location.replace(dest);
   }
   try {
     if (window.gtag) {
+      if (ref) {
+        gtag('event', 'affiliate_click', {
+          aff_id: ref,
+          utm_source: utm,
+          destination: destName,
+          transport_type: 'beacon'
+        });
+      }
       gtag('event', 'note_redirect', {
         utm_source: utm,
-        destination: 'note_shelf',
+        aff_id: ref || "(none)",
+        destination: destName,
         transport_type: 'beacon',
         event_callback: go,
         event_timeout: 800
