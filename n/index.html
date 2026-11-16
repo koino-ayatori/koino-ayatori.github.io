@@ -29,6 +29,8 @@
 <script>
 (function(){
   var NOTE_URL = "https://note.com/koino_ayatori";
+  // 紹介クリックをスプレッドシートに記録する Apps Script のURL（デプロイ後に入れる）
+  var CLICK_LOG_URL = "";
   // 紹介リンク用の飛び先。記事のURLを入れると ?to= で指定できる（空なら棚へ）
   var DEST = {
     shelf:    NOTE_URL,
@@ -51,6 +53,14 @@
     if (done) return;
     done = true;
     location.replace(dest);
+  }
+  if (ref && CLICK_LOG_URL) {
+    try {
+      var body = new URLSearchParams({ action: "click", aff: ref, dest: destName });
+      if (!(navigator.sendBeacon && navigator.sendBeacon(CLICK_LOG_URL, body))) {
+        fetch(CLICK_LOG_URL, { method: "POST", body: body, mode: "no-cors", keepalive: true });
+      }
+    } catch(e){}
   }
   try {
     if (window.gtag) {
