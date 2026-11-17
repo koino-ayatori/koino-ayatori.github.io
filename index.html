@@ -327,7 +327,7 @@ const GAPS = {
      {name:"話し合って、仲直りする力",why:"ぶつかる前に、自分から関係を終わらせてしまいます。",book:"book2",risk:"好きなのに、\n自分から終わらせたり、喧嘩してしまったり。\nそんな恋をくり返してしまうかもしれません。"}]
 };
 const BOOKS = {
-  iriguchi:{title:"『【完全保存版】彼に振り回されない恋の仕方』",desc:"不安な夜に、何を考えて、どう動くか。<br>彼の反応に振り回されない毎日へ。"},
+  iriguchi:{url:"https://note.com/koino_ayatori/n/n6133b958445d",title:"『【完全保存版】彼に振り回されない恋の仕方』",desc:"不安な夜に、何を考えて、どう動くか。<br>彼の反応に振り回されない毎日へ。"},
   book1:{title:"『尽くす恋から愛される恋へ』",desc:"自分ばかり頑張る恋から、<br>彼に求められる恋へ。"},
   book2:{title:"『すれ違いを絆に変える』",desc:"本音を言うほど、すれ違う関係から、<br>本音を言うほど安心できる関係へ。"}
 };
@@ -347,6 +347,7 @@ function renderGap(score,cnt,side){
   const bk=BOOKS[lastBook];
   $("fixTitle").textContent=bk.title;
   $("fixDesc").innerHTML=bk.desc;
+  $("fixLink").href=bk.url||AFFILIATE_URL;
 }
 
 const TYPES = {
