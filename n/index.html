@@ -23,7 +23,7 @@
 </head>
 <body>
 <div>
-  <p>noteへ移動します</p>
+  <p id="msg">移動します</p>
   <p><a id="go" href="https://note.com/koino_ayatori">移動しない場合はこちら</a></p>
 </div>
 <script>
@@ -36,7 +36,8 @@
     shelf:    NOTE_URL,
     iriguchi: "https://note.com/koino_ayatori/n/n6133b958445d", // 入口980円『【完全保存版】彼に振り回されない恋の仕方』
     book1:    "https://note.com/koino_ayatori/n/nd3b10ac212e7", // 1冊目 『【完全保存版】「彼の気持ちが分からない」彼から一生愛され・求められ続ける『恋のあやとりの法則』』
-    book2:    "https://note.com/koino_ayatori/n/nb4c7a599150c"  // 2冊目『すれ違いを絆に変える』
+    book2:    "https://note.com/koino_ayatori/n/nb4c7a599150c", // 2冊目『すれ違いを絆に変える』
+    instagram:"https://www.instagram.com/koino_ayatori/"        // TikTokのプロフィール用（?to=instagram&utm_source=tiktok）
   };
   var q = null;
   try { q = new URLSearchParams(location.search); } catch(e){}
@@ -48,6 +49,7 @@
   var dest = (to && DEST[to]) ? DEST[to] : NOTE_URL;
   var destName = (to && DEST[to]) ? to : "shelf";
   try { document.getElementById("go").href = dest; } catch(e){}
+  try { if (to === "instagram") document.getElementById("msg").textContent = "Instagramへ移動します"; else document.getElementById("msg").textContent = "noteへ移動します"; } catch(e){}
   var done = false;
   function go(){
     if (done) return;
